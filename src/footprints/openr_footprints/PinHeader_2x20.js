@@ -1,8 +1,16 @@
+// PinHeader_2x20_P2.54mm_Vertical
+// Params
+// mirror: default is true (false)
+//    if true, footprint will be mirrored (even pins on left side and odd pins on right side) 
+//    if false, footprint will have no changes (even pins on right side and odd pins on left side)
+// side: default is F (front)
+//    in case is B (back), footprint would be placed on that side and also mirrored (in order to look properly when looking from that side)
+
 module.exports = {
   params: {
     designator: 'PinHeader_2x20',
     side: 'F',
-    mirror: 'false',
+    flip: true,
     V5: {type: 'net', value: '5V'},
     GP_EXTRA: {type: 'net', value: 'GP_EXTRA'},
     GND: {type: 'net', value: 'GND'},
@@ -45,13 +53,8 @@ module.exports = {
       ${'' /* footprint reference */}
       (fp_text reference "${p.ref}" (at 0 0) (layer F.SilkS) ${p.ref_hide} (effects (font (size 1.27 1.27) (thickness 0.15))))
       (fp_text value "" (at 0 0) (layer F.SilkS) hide (effects (font (size 1.27 1.27) (thickness 0.15))))
-      
-      ${''/* footprint limits*/}
-      (fp_line (start -1.8 -1.8) (end -1.8 50.05) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
-      (fp_line (start -1.8 50.05) (end 4.35 50.05) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
-      (fp_line (start 4.35 -1.8) (end -1.8 -1.8) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
-      (fp_line (start 4.35 50.05) (end 4.35 -1.8) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
       `
+
     function pins(def_neg, def_pos) {
       return `
         ${'' /* component outline*/}
@@ -70,6 +73,12 @@ module.exports = {
         (fp_line (start 0 -1.27) (end ${def_pos}3.81 -1.27) (stroke (width 0.1) (type solid)) (layer ${p.side}.Fab))
         (fp_line (start ${def_pos}3.81 -1.27) (end ${def_pos}3.81 49.53) (stroke (width 0.1) (type solid)) (layer ${p.side}.Fab))
         (fp_line (start ${def_pos}3.81 49.53) (end ${def_neg}1.27 49.53) (stroke (width 0.1) (type solid)) (layer ${p.side}.Fab))       
+        
+         ${''/* footprint limits*/}
+        (fp_line (start ${def_neg}1.8 -1.8) (end ${def_neg}1.8 50.05) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start ${def_neg}1.8 50.05) (end ${def_pos}4.35 50.05) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start ${def_pos}4.35 -1.8) (end ${def_neg}1.8 -1.8) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start ${def_pos}4.35 50.05) (end ${def_pos}4.35 -1.8) (stroke (width 0.05) (type solid)) (layer ${p.side}.CrtYd))
         
         ${'' /* pin holes*/}
         (pad 1 thru_hole rect (at 0 0 ${p.rot}) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.V3.str})
@@ -115,28 +124,25 @@ module.exports = {
         `
     }
     if(p.side == 'F') {
-      if(p.mirror == 'true') {
+      if(p.flip == true) {
         return `
           ${standard}
           ${pins('', '-')})
           `
-      }
-      else{
+      } else{
         return `
           ${standard}
           ${pins('-', '')})
           `  
       }
-      
     }
     else {
-      if(p.mirror == 'true') {
+      if(p.flip == true) {
         return `
           ${standard}
           ${pins('-', '')})
           `
-      }
-      else {
+      } else {
         return `
           ${standard}
           ${pins('', '-')})
