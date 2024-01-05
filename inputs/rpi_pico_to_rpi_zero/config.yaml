@@ -1,0 +1,68 @@
+points:
+  zones:
+    origin:
+      key:
+        width: 1
+        height: 1
+    holes:
+        anchor:
+          ref: origin
+          shift: [-23/2, -58/2]
+        columns:
+          left:
+          right:
+        rows:
+          bottom:
+          top:
+        key:
+          width: 6
+          height: 6
+          padding: 58
+          spread: 23
+    MCU:
+      anchor:
+        ref: origin
+        shift: [3, 0]
+      key:
+        width: 21
+        height: 51
+    pins:
+      anchor:
+        ref: origin
+        shift: [-23/2, 0]
+      key:
+        width: 5
+        height: 51
+
+outlines:
+  pcb_perimeter:
+    - what: rectangle
+      where: origin
+      size: [30, 65]
+      corner: 3
+
+pcbs:
+  rpi_pico_to_zero_adapter:
+    outlines:
+      main:
+        outline: pcb_perimeter
+    footprints:
+      rpi_pico:
+        what: rpi_pico
+        where: 
+          ref: MCU
+        params:
+          orientation: up
+          side: B
+      pins:
+        what: PinHeader_2x20
+        where:
+          ref: pins
+          shift: [-2.54/2, (51/2) - (2.54/2) - 0.1]
+        params:
+          side: B
+          flip: true
+      mounting_holes:
+        what: MountingHole
+        where:
+          - /^holes_.*/
