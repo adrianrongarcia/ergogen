@@ -1,6 +1,7 @@
 // PinHeader_2x20_P2.54mm_Vertical
+// This footprint is meant to be used as output of another footprint (for example, an MCU)
 // Params
-// mirror: default is true (false)
+// flip: default is true (false)
 //    if true, footprint will be mirrored (even pins on left side and odd pins on right side) 
 //    if false, footprint will have no changes (even pins on right side and odd pins on left side)
 // side: default is F (front)
@@ -10,40 +11,41 @@ module.exports = {
   params: {
     designator: 'PinHeader_2x20',
     side: 'F',
-    flip: true,
-    V5: {type: 'net', value: '5V'},
-    GP_EXTRA: {type: 'net', value: 'GP_EXTRA'},
-    GND: {type: 'net', value: 'GND'},
-    GP14: {type: 'net', value: 'GP14'},
-    GP15: {type: 'net', value: 'GP15'},
-    GP18: {type: 'net', value: 'GP18'},
-    GP23: {type: 'net', value: 'GP23'},
-    GP24: {type: 'net', value: 'GP24'},
-    GP25: {type: 'net', value: 'GP25'},
-    GP8: {type: 'net', value: 'GP8'},
-    GP7: {type: 'net', value: 'GP7'},
-    GP1: {type: 'net', value: 'GP1'},
-    GP12: {type: 'net', value: 'GP12'},
-    GP16: {type: 'net', value: 'GP16'},
-    GP20: {type: 'net', value: 'GP20'},
-    GP21: {type: 'net', value: 'GP21'},
-    GP26: {type: 'net', value: 'GP26'},
-    GP19: {type: 'net', value: 'GP19'},
-    GP13: {type: 'net', value: 'GP13'},
-    GP6: {type: 'net', value: 'GP6'},
-    GP5: {type: 'net', value: 'GP5'},
-    GP0: {type: 'net', value: 'GP0'},
-    GP11: {type: 'net', value: 'GP11'},
-    GP9: {type: 'net', value: 'GP9'},
-    GP10: {type: 'net', value: 'GP10'},
-    V3_AUX: {type: 'net', value: '3V_AUX'},
-    GP22: {type: 'net', value: 'GP22'},
-    GP27: {type: 'net', value: 'GP27'},
-    GP17: {type: 'net', value: 'GP17'},
-    GP4: {type: 'net', value: 'GP4'},
-    GP3: {type: 'net', value: 'GP3'},
-    GP2: {type: 'net', value: 'GP2'},
-    V3: {type: 'net', value: '3V'},
+    flip: false,
+    V5: undefined,
+    GP_EXTRA: undefined,
+    GND: undefined,
+    GP14: undefined,
+    GP15: undefined,
+    GP18: undefined,
+    GP23: undefined,
+    GP24: undefined,
+    GP25: undefined,
+    GP8: undefined,
+    GP7: undefined,
+    GP1: undefined,
+    GP12: undefined,
+    GP16: undefined,
+    GP20: undefined,
+    GP21: undefined,
+    GP26: undefined,
+    GP19: undefined,
+    GP13: undefined,
+    GP6: undefined,
+    GP5: undefined,
+    GP0: undefined,
+    GP11: undefined,
+    GP9: undefined,
+    GP10: undefined,
+    V3_AUX: undefined,
+    GP22: undefined,
+    GP27: undefined,
+    GP17: undefined,
+    AGND: undefined,
+    GP4: undefined,
+    GP3: undefined,
+    GP2: undefined,
+    V3: undefined,
   },
   body: p => {
     const standard = `
@@ -89,7 +91,7 @@ module.exports = {
         (pad 6 thru_hole oval (at ${def_pos}2.54 5.08) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GND.str})
         (pad 7 thru_hole oval (at 0 7.62) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP4.str})
         (pad 8 thru_hole oval (at ${def_pos}2.54 7.62) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP14.str})
-        (pad 9 thru_hole oval (at 0 10.16) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GND.str})
+        (pad 9 thru_hole oval (at 0 10.16) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.AGND.str})
         (pad 10 thru_hole oval (at ${def_pos}2.54 10.16) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP15.str})
         (pad 11 thru_hole oval (at 0 12.7) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP17.str})
         (pad 12 thru_hole oval (at ${def_pos}2.54 12.7) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP18.str})

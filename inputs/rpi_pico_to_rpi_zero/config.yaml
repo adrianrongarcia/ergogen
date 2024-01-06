@@ -33,6 +33,13 @@ points:
       key:
         width: 5
         height: 51
+    I2C_extender:
+      anchor:
+        ref: MCU
+      key:
+        width: 22.76
+        height: 10
+        rotate: 90
 
 outlines:
   pcb_perimeter:
@@ -54,6 +61,21 @@ pcbs:
         params:
           orientation: up
           side: B
+      I2C_extender:
+        what: MCP23008
+        where:
+          ref: I2C_extender
+        params:
+          SCL: GP21
+          SDA: GP20
+          A2: GND
+          A1: GND
+          A0: GND
+          RESET: VBUS
+          NC: ''
+          INT: ''
+          VSS: GND
+          VDD: VBUS
       pins:
         what: PinHeader_2x20
         where:
@@ -62,6 +84,41 @@ pcbs:
         params:
           side: B
           flip: true
+          V5: VBUS
+          GP_EXTRA: EXTRA_0
+          GND: GND
+          GP14: GP0
+          GP15: GP1
+          GP18: GP13
+          GP23: GP4
+          GP24: GP5
+          GP25: GP6
+          GP8: GP18
+          GP7: GP7
+          GP1: GP8
+          GP12: GP9
+          GP16: EXTRA_4
+          GP20: GP12
+          GP21: GP10
+          GP26: GP14
+          GP19: GP11
+          GP13: GP15
+          GP6: EXTRA_1
+          GP5: EXTRA_2
+          GP0: EXTRA_3
+          GP11: GP17
+          GP9: GP19
+          GP10: GP16
+          V3_AUX: ADC_VREF
+          GP22: GP26
+          GP27: GP27
+          GP17: GP28
+          AGND: AGND
+          GP4: GP22
+          GP3: GP3
+          GP2: GP2
+          V3: V3
+         
       mounting_holes:
         what: MountingHole
         where:
