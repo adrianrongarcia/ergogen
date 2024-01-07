@@ -40,13 +40,38 @@ points:
         width: 22.76
         height: 10
         rotate: 90
+    4P4C:
+      anchor:
+        ref: holes_right_bottom
+        shift: [-3.5, -8]
+      key:
+        width: 10
+        height: 13
+        rotate: 90
 
 outlines:
-  pcb_perimeter:
+  pcb_perimeter_raw:
     - what: rectangle
       where: origin
       size: [30, 65]
-      corner: 3
+    - what: rectangle
+      where: 4P4C
+      size: [12, 14]
+    - what: polygon
+      operation: subtract
+      points:
+        - ref: holes_left_top
+          shift: [1.5, 3.6]
+        - ref: holes_right_top
+          shift: [-2.5, 3.6]
+        - ref: holes_right_top
+          shift: [-5, -3.5]
+        - ref: holes_left_top
+          shift: [9, -3.5]
+  pcb_perimeter:
+    - what: outline
+      name: pcb_perimeter_raw
+      fillet: 3
 
 pcbs:
   rpi_pico_to_zero_adapter:
@@ -76,6 +101,16 @@ pcbs:
           INT: ''
           VSS: GND
           VDD: VBUS
+      RJ11_4P4C:
+        what: RJ11_4p4c
+        where:
+          ref: 4P4C
+        params:
+          side: B
+          A: VBUS
+          B: GND
+          C: GP1
+          D: GP0
       pins:
         what: PinHeader_2x20
         where:
@@ -118,7 +153,6 @@ pcbs:
           GP3: GP3
           GP2: GP2
           V3: V3
-         
       mounting_holes:
         what: MountingHole
         where:
