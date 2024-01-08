@@ -47,6 +47,14 @@ points:
       key:
         width: 10
         height: 13
+        rotate: -90
+    4P4C_ExtraSafety:
+      anchor:
+        ref: 4P4C
+        shift: [-7, 0]
+      key:
+        width: 12.5
+        height: 9
         rotate: 90
 
 outlines:
@@ -101,13 +109,21 @@ pcbs:
           INT: ''
           VSS: GND
           VDD: VBUS
+      4P4C_ExtraSafety:
+        what: 4P4C_Extra_Safety_VCC-GND
+        where:
+          ref: 4P4C_ExtraSafety
+        params:
+          side: B
+          VOUT: VBUS
+          VIN: VSYS
       RJ11_4P4C:
         what: RJ11_4p4c
         where:
           ref: 4P4C
         params:
           side: B
-          A: VBUS
+          A: POWER
           B: GND
           C: GP1
           D: GP0
