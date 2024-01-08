@@ -43,8 +43,8 @@ module.exports = {
       (fp_line (start -5.5 7.5) (end 5.5 7.5) (stroke (width 0.05) (type default)) (layer ${p.side}.CrtYd))
       (fp_line (start 5.5 -1.5) (end 5.5 -6.5) (stroke (width 0.05) (type default)) (layer ${p.side}.CrtYd))
       (fp_line (start 5.5 7.5) (end 5.5 1.5) (stroke (width 0.05) (type default)) (layer ${p.side}.CrtYd))
-      (fp_arc (start -5 0)  (end -5.5 1.5) (angle -143) (stroke (width 0.05) (type default)) (layer ${p.side}.CrtYd))
-      (fp_arc (start 5 0) (end 5.5 1.5) (angle 143) (stroke (width 0.05) (type default)) (layer ${p.side}.CrtYd))
+      (fp_arc (start -5 0)  (end -5.5 1.5) (angle 143) (stroke (width 0.05) (type default)) (layer ${p.side}.CrtYd))
+      (fp_arc (start 5 0) (end 5.5 1.5) (angle -143) (stroke (width 0.05) (type default)) (layer ${p.side}.CrtYd))
       
       ${'' /* fooptrint fabrication info */}
       (fp_line (start -5 7) (end -5 -6) (stroke (width 0.15) (type default)) (layer ${p.side}.Fab))
