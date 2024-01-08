@@ -6,22 +6,20 @@ module.exports = {
     flip: false,
     VOUT: undefined,
     VIN: undefined,
-    POWER: {
-      type: 'net', value: 'POWER'
-    },
-    body: p => {
-      const standard = `
-      (module 4P4C_Extra_Safety_VCC-GND (layer F.Cu) (tedit 5970F8E5)
+    POWER: { type: 'net', value: 'POWER'}
+  },
+  body: p => {
+    const standard = `
+    (module 4P4C_Extra_Safety_VCC-GND (layer F.Cu) (tedit 5970F8E5)
 
-      ${p.at /* parametric position */}   
+    ${p.at /* parametric position */}   
 
-      ${'' /* footprint reference */}
-      (fp_text reference "${p.ref}" (at 0 0) (layer Dwgs.User) (effects (font (size 1 1) (thickness 0.15))))
-      (fp_text value "" (at 0 0) (layer F.Fab) (effects (font (size 1 1) (thickness 0.15))))
-      `
-
-      function pins(def_neg, def_pos) {
-        return `
+    ${'' /* footprint reference */}
+    (fp_text reference "${p.ref}" (at 0 0) (layer Dwgs.User) (effects (font (size 1 1) (thickness 0.15))))
+    (fp_text value "" (at 0 0) (layer F.Fab) (effects (font (size 1 1) (thickness 0.15))))
+    `
+    function pins(def_neg, def_pos) {
+      return `
         ${'' /* footprint outline */}
         (fp_line (start ${def_neg}2.6 1.9) (end ${def_pos}2.6 1.9) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
         (fp_line (start ${def_neg}2.6 4.5) (end ${def_neg}2.6 1.9) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
@@ -74,11 +72,11 @@ module.exports = {
         (fp_circle (center ${def_neg}6.992 0) (end ${def_neg}6.892 0) (stroke (width 0.2) (type solid)) (fill none) (layer ${p.side}.Fab))
         
         ${'' /* footprint holes*/}
-        (pad 1 thru_hole rect (at ${def_neg}5.197 0 ${p.rot}) (size $1.59 1.59) (drill 1.06) (layers *.Cu *.Mask) (solder_mask_margin 0.102))
-        (pad 2 thru_hole circle (at ${def_pos}5.197 0) (size 1.59 1.59) (drill 1.06) (layers *.Cu *.Mask) (solder_mask_margin 0.102) ${p.POWER})
-        (pad 3 thru_hole rect (at ${def_neg}1.27 5.77 ${p.rot}) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.VIN})
-        (pad 4 thru_hole oval (at ${def_neg}1.27 3.23) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.VOUT})
-        (pad 5 thru_hole oval (at ${def_pos}1.27 5.77) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
+        (pad 1 thru_hole rect (at ${def_neg}5.197 0 ${p.rot}) (size 1.59 1.59) (drill 1.06) (layers *.Cu *.Mask) (solder_mask_margin 0.102))
+        (pad 2 thru_hole circle (at ${def_pos}5.197 0) (size 1.59 1.59) (drill 1.06) (layers *.Cu *.Mask) (solder_mask_margin 0.102) ${p.POWER.str})
+        (pad 3 thru_hole rect (at ${def_neg}1.27 5.77 ${p.rot}) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.VIN.str})
+        (pad 4 thru_hole oval (at ${def_pos}1.27 5.77) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.VOUT.str})
+        (pad 5 thru_hole oval (at ${def_neg}1.27 3.23) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
         (pad 6 thru_hole oval (at ${def_pos}1.27 3.23) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask))
   
         ${'' /* footprint traces */}
@@ -90,32 +88,30 @@ module.exports = {
         (fp_line (start ${def_pos}2.38 0) (end ${def_pos}1.27 1.21) (stroke (width 0.25) (type default)) (layer ${p.side}.Cu))
         (fp_line (start ${def_pos}5.197 0) (end ${def_pos}2.38 0) (stroke (width 0.25) (type default)) (layer ${p.side}.Cu))
         `
-      }
-
-      if (p.side == 'F') {
-        if (p.flip == true) {
-          return `
+    }
+    if (p.side == 'F') {
+      if (p.flip == true) {
+        return `
           ${standard}
           ${pins('', '-')})
           `
-        } else {
-          return `
-          ${standard}
-          ${pins('-', '')})
-          `
-        }
       } else {
-        if (p.flip == true) {
-          return `
+        return `
           ${standard}
           ${pins('-', '')})
           `
-        } else {
-          return `
+      }
+    } else {
+      if (p.flip == true) {
+        return `
+          ${standard}
+          ${pins('-', '')})
+          `
+      } else {
+        return `
           ${standard}
           ${pins('', '-')})
           `
-        }
       }
     }
   }
