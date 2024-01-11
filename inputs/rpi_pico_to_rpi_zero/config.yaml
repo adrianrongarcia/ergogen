@@ -62,24 +62,30 @@ outlines:
     - what: rectangle
       where: origin
       size: [30, 65]
-    - what: rectangle
-      where: 4P4C
-      size: [12, 14]
     - what: polygon
       operation: subtract
       points:
         - ref: holes_left_top
           shift: [1.5, 3.6]
         - ref: holes_right_top
-          shift: [-2.5, 3.6]
+          shift: [-3.5, 3.6]
         - ref: holes_right_top
-          shift: [-5, -3.5]
+          shift: [-3.5, -2.25]
         - ref: holes_left_top
-          shift: [9, -3.5]
+          shift: [9, -2.25]
   pcb_perimeter:
     - what: outline
       name: pcb_perimeter_raw
       fillet: 3
+    - what: polygon
+      operation: subtract
+      points:
+        - ref: holes_right_top
+          shift: [-3.5, -2.25]
+        - ref: holes_right_top
+          shift: [-3.5, 0]
+        - ref: holes_right_top
+          shift: [-10, -2.25]
 
 pcbs:
   rpi_pico_to_zero_adapter:
@@ -93,12 +99,14 @@ pcbs:
           ref: MCU
         params:
           orientation: up
-          side: B
+          side: F
+          model: 'vcc-gnd'
       I2C_extender:
         what: MCP23008
         where:
           ref: I2C_extender
         params:
+          side: B
           SCL: GP21
           SDA: GP20
           A2: GND
