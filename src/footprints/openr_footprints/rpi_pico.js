@@ -4,13 +4,18 @@
 //    if down, power led will face the pcb
 //    if up, power led will face away from pcb
 // side: default is F (front)
+// model: default is default (orginal rpi pico). The other valid value is vcc-gnd
+// SMD: default is false (it is only possible when model is default
+// legends: default is true. If you dont whant the silkscreen of each pin, set it to false
 
 module.exports = {
   params: {
     designator: 'RPi_Pico',
     orientation: 'down',
     side: 'F',
+    model: 'default',
     SMD: false,
+    legends: true,
     VBUS: {type: 'net', value: 'VBUS'},
     VSYS: {type: 'net', value: 'VSYS'},
     Vin: {type: 'net', value: 'Vin'},
@@ -58,40 +63,7 @@ module.exports = {
       ${'' /* footprint reference */}
       (fp_text reference "${p.ref}" (at 0 0) (layer F.SilkS) ${p.ref_hide} (effects (font (size 1.27 1.27) (thickness 0.15))))
       (fp_text value "" (at 0 0) (layer F.SilkS) hide (effects (font (size 1.27 1.27) (thickness 0.15))))
-    
-    
-    
-     
-    
-     
       `
-
-    function pins(def_neg, def_pos, def_text_mirror) {
-      return `
-        ${''/* extra border around "GP0", for extra distinctive info */}
-        (fp_line (start ${def_neg}7.493 -22.833) (end ${def_neg}7.493 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_neg}10.5 -22.833) (end ${def_neg}7.493 -22.833) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-      
-        ${''/* footprint limits*/}
-        (fp_line (start -11 -26) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start -11 26) (end -11 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start -4.16 -27.3) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start -4.16 -27.3) (end 4.18 -27.3) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 4.18 -27.3) (end 4.18 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 4.18 -26) (end 11 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 11 -26) (end 11 26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 11 26) (end -11 26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-      
-        ${''/* fabrication info*/}
-        (fp_line (start -10.5 -25.5) (end 10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start ${def_neg}10.5 -24.2) (end ${def_neg}9.2 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start -10.5 25.5) (end -10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start 10.5 -25.5) (end 10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start 10.5 25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-  
-
-      `
-    }
     function SMD(def_neg, def_pos) {
       return `
         ${''/* SMD Pads */}
@@ -136,7 +108,10 @@ module.exports = {
         (pad 38 smd rect (at ${def_pos}8.89 -19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
         (pad 39 smd rect (at ${def_pos}8.89 -21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
         (pad 40 smd rect (at ${def_pos}8.89 -24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        
+        `
+    }
+    function SMD_up_EdgeCut() {
+      return `
         ${'' /* edge cut for easy soldering of debug pins when soldering MCU via SMD*/}
         (fp_rect (start -4.65 23.05) (end 4.65 24.75) (stroke (width 0.12) (type solid)) (fill solid) (layer Edge.Cuts))
     
@@ -145,13 +120,68 @@ module.exports = {
         (pad "" np_thru_hole oval (at -2.425 -20.97) (size 1.5 1.5) (drill 1.5) (layers *.Cu *.Mask))
         (pad "" np_thru_hole oval (at 2.425 -20.97) (size 1.5 1.5) (drill 1.5) (layers *.Cu *.Mask))
         (pad "" np_thru_hole oval (at 2.725 -24) (size 1.8 1.8) (drill 1.8) (layers *.Cu *.Mask))
-        `
+        
+        ${'' /* user drawings for some extra components */}
+        (fp_poly
+        (pts
+          (xy -1.5 -16.5)
+          (xy -3.5 -16.5)
+          (xy -3.5 -18.5)
+          (xy -1.5 -18.5)
+        )
+        (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
+    
+        (fp_poly
+        (pts
+          (xy -1.5 -14)
+          (xy -3.5 -14)
+          (xy -3.5 -16)
+          (xy -1.5 -16)
+        )
+        (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
+    
+        (fp_poly
+        (pts
+          (xy -1.5 -11.5)
+          (xy -3.5 -11.5)
+          (xy -3.5 -13.5)
+          (xy -1.5 -13.5)
+        )
+        (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
+      `
+    }
+    function SMD_down_EdgeCut() {
+      return `
+        ${'' /* edge cut for allowing clearance of pcb elements*/}
+        (fp_rect (start -7.5 -27.3) (end 7.5 24.75) (stroke (width 0.12) (type solid)) (fill solid) (layer Edge.Cuts))
+      `
     }
     function default_common_elements(def_neg, def_pos) {
       return `
         ${'' /* component outline*/}
         (fp_line (start -10.5 -25.5) (end 10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
         (fp_line (start 10.5 25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        
+        ${''/* extra border around "GP0", for extra distinctive info */}
+        (fp_line (start ${def_neg}7.493 -22.833) (end ${def_neg}7.493 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_neg}10.5 -22.833) (end ${def_neg}7.493 -22.833) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS)) 
+        
+        ${''/* footprint limits*/}
+        (fp_line (start -11 -26) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start -11 26) (end -11 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start -4.16 -27.3) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start -4.16 -27.3) (end 4.18 -27.3) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start 4.18 -27.3) (end 4.18 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start 4.18 -26) (end 11 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start 11 -26) (end 11 26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start 11 26) (end -11 26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+      
+        ${''/* fabrication info*/}
+        (fp_line (start -10.5 -25.5) (end 10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_neg}10.5 -24.2) (end ${def_neg}9.2 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start -10.5 25.5) (end -10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start 10.5 -25.5) (end 10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start 10.5 25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
         
         ${'' /* user drawings for USB area */}
         (fp_poly
@@ -162,6 +192,49 @@ module.exports = {
           (xy 3.7 -26.8)
         )
         (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
+        `
+    }
+    function vcc_gnd_general (def_neg, def_pos){
+      return ` 
+        ${'' /* footprint outline */}
+        (fp_line (start ${def_neg}11.43 -26.67) (end ${def_neg}11.43 26.67) (stroke (width 0.12) (type default)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_neg}11.43 -26.67) (end ${def_pos}11.43 -26.67) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_neg}10.16 -25.4) (end ${def_neg}7.62 -25.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_neg}10.16 -22.86) (end ${def_neg}10.16 -25.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_neg}10.16 -22.86) (end ${def_neg}7.62 -22.86) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_neg}7.62 -22.86) (end ${def_neg}7.62 -25.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_pos}11.43 26.67) (end ${def_neg}11.43 26.67) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_pos}11.43 26.67) (end ${def_pos}11.43 -26.67) (stroke (width 0.12) (type default)) (layer ${p.side}.SilkS))
+        
+        ${'' /* footprint user drawing for USB C */}
+        (fp_poly
+        (pts
+          (xy 4.47 -19.32)
+          (xy -4.47 -19.32)
+          (xy -4.47 -26.67)
+          (xy 4.47 -26.67)
+        )
+        (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
+        
+        ${'' /* footprint limits */}
+        (fp_line (start -11.93 -27.17) (end 11.93 -27.17) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start -11.93 27.17) (end -11.93 -27.17) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start -11.93 27.17) (end 11.93 27.17) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start 11.93 27.17) (end 11.93 -27.17) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        
+        ${'' /* footprint fabrication info */}
+        (fp_line (start ${def_neg}11.43 26.67) (end ${def_neg}11.43 -26.67) (stroke (width 0.12) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_neg}10.155 -24.125) (end ${def_neg}8.885 -25.395) (stroke (width 0.1) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_neg}10.155 25.405) (end ${def_neg}10.155 -24.125) (stroke (width 0.1) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_neg}8.885 -25.4) (end ${def_neg}7.62 -25.4) (stroke (width 0.1) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_neg}7.62 -25.4) (end ${def_neg}7.62 25.4) (stroke (width 0.1) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_neg}7.62 25.405) (end ${def_neg}10.155 25.405) (stroke (width 0.1) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_pos}7.62 -25.5) (end ${def_pos}7.62 25.4) (stroke (width 0.1) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_pos}7.62 -25.5) (end ${def_pos}10.155 -25.5) (stroke (width 0.1) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_pos}7.62 25.4) (end ${def_pos}10.155 25.4) (stroke (width 0.1) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_pos}10.155 -25.5) (end ${def_pos}10.155 25.4) (stroke (width 0.1) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_pos}11.43 -26.67) (end ${def_pos}11.43 26.67) (stroke (width 0.12) (type default)) (layer ${p.side}.Fab))
+        (fp_line (start ${def_pos}11.43 26.67) (end ${def_neg}11.43 26.67) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
         `
     }
     function common_pins(def_neg, def_pos) {
@@ -232,6 +305,9 @@ module.exports = {
     }
     function default_outline_standard(def_neg, def_pos) {
       return `
+        ${'' /* component outline*/}
+        (fp_line (start -10.5 -25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start 10.5 -25.5) (end 10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
       `
     }
     function default_outline_SMD(def_neg, def_pos) {
@@ -277,36 +353,6 @@ module.exports = {
         (fp_line (start 10.5 17.6) (end 10.5 18) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
         (fp_line (start 10.5 20.1) (end 10.5 20.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
         (fp_line (start 10.5 22.7) (end 10.5 23.1) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        
-        ${'' /* user drawings for some extra components */}
-        (fp_poly
-        (pts
-          (xy -1.5 -16.5)
-          (xy -3.5 -16.5)
-          (xy -3.5 -18.5)
-          (xy -1.5 -18.5)
-        )
-        (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
-    
-        (fp_poly
-        (pts
-          (xy -1.5 -14)
-          (xy -3.5 -14)
-          (xy -3.5 -16)
-          (xy -1.5 -16)
-        )
-        (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
-    
-        (fp_poly
-        (pts
-          (xy -1.5 -11.5)
-          (xy -3.5 -11.5)
-          (xy -3.5 -13.5)
-          (xy -1.5 -13.5)
-        )
-        (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
-    
-        
         `
     }
     function common_legend(def_neg, def_pos, def_text_mirror) {
@@ -368,36 +414,285 @@ module.exports = {
       return `
         ${''/* pin names */}
         (fp_text user Vout (at ${def_pos}6.4 -24.11 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user Vin (at ${def_pos}6 -21.59 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user Vin (at ${def_pos}7 -21.59 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
         (fp_text user GP23 (at ${def_pos}6.4 -16.5 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
         (fp_text user GP29 (at ${def_pos}6.4 -11.4 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         `
     }
-    if(p.orientation == 'down') {
-      if(p.side == 'F') {
-        return `
-          ${standard}
-          ${pins('', '-', '')})
-          `
+    if(p.model == 'default') {
+      if(p.SMD == true) {
+        if(p.orientation == 'down') {
+          if(p.side == 'F'){
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_SMD('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${SMD('', '-')}
+                ${SMD_down_EdgeCut()}
+                ${common_legend('', '-', '')}
+                ${default_specific_legend('', '-', '')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_SMD('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${SMD('', '-')}
+                ${SMD_down_EdgeCut})
+                `
+            }
+          }
+          else {
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_SMD('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${SMD('-', '')}
+                ${SMD_down_EdgeCut()}
+                ${common_legend('-', '', '(justify mirror)')}
+                ${default_specific_legend('-', '', '(justify mirror)')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_SMD('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${SMD('-', '')}
+                ${SMD_down_EdgeCut()})
+                `
+            }
+          }
+        } else {
+          if(p.side == 'F'){
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_SMD('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${SMD('-', '')}
+                ${SMD_up_EdgeCut()}
+                ${common_legend('-', '', '')}
+                ${default_specific_legend('-', '', '')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_SMD('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${SMD('-', '')}
+                ${SMD_up_EdgeCut()})
+                `
+            }
+          }
+          else {
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_SMD('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${SMD('', '-')}
+                ${SMD_up_EdgeCut()}
+                ${common_legend('', '-', '(justify mirror)')}
+                ${default_specific_legend('', '-', '(justify mirror)')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_SMD('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${SMD('', '-')}
+                ${SMD_up_EdgeCut()})
+                `
+            }
+          }
+        }
       } else {
-        return `
-          ${standard}
-          ${pins('-', '', '(justify mirror)')})
-          `
+        if(p.orientation == 'down') {
+          if(p.side == 'F'){
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_standard('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${common_legend('', '-', '')}
+                ${default_specific_legend('', '-', '')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_standard('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')})
+                `
+            }
+          }
+          else {
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_standard('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${common_legend('-', '', '(justify mirror)')}
+                ${default_specific_legend('-', '', '(justify mirror)')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_standard('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')})
+                `
+            }
+          }
+        } else {
+          if(p.side == 'F'){
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_standard('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${common_legend('-', '', '')}
+                ${default_specific_legend('-', '', '')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('-', '')}
+                ${default_outline_standard('-', '')}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')})
+                `
+            }
+          }
+          else {
+            if(p.legends == true) {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_standard('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${common_legend('', '-', '(justify mirror)')}
+                ${default_specific_legend('', '-', '(justify mirror)')})
+                `
+            } else {
+              return `
+                ${standard}
+                ${default_common_elements('', '-')}
+                ${default_outline_standard('', '-')}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')})
+                `
+            }
+          }
+        }
       }
-    } else {
-      if(p.side == 'F') {
-        return `
-          ${standard}
-          ${pins('-', '', '')})
-          `
+    } else if(p.model == 'vcc-gnd') {
+      if(p.orientation == 'down') {
+        if(p.side == 'F') {
+          if(p.legends == true) {
+            return `
+              ${standard}
+              ${vcc_gnd_general('', '-')}
+              ${common_pins('', '-')}
+              ${vcc_gnd_specific_pins('', '-')}
+              ${common_legend('', '-', '')}
+              ${vcc_gnd_specific_legend('', '-', '')})
+              `
+          } else {
+            return `
+              ${standard}
+              ${vcc_gnd_general('', '-')}
+              ${common_pins('', '-')}
+              ${vcc_gnd_specific_pins('', '-')})
+              `
+            }
+        } else {
+          if(p.legends == true) {
+            return `
+              ${standard}
+              ${vcc_gnd_general('-', '')}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')}
+              ${common_legend('-', '', '(justify mirror)')}
+              ${vcc_gnd_specific_legend('-', '', '(justify mirror)')})
+              `
+          } else {
+            return `
+              ${standard}
+              ${vcc_gnd_general('-', '')}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')})
+              `
+          }
+        }
       } else {
-        return `
-          ${standard}
-          ${pins('', '-', '(justify mirror)')})
-          `
+        if(p.side == 'F'){
+          if(p.legends == true) {
+            return `
+              ${standard}
+              ${vcc_gnd_general('-', '')}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')}
+              ${common_legend('-', '', '')}
+              ${vcc_gnd_specific_legend('-', '', '')})
+              `
+          } else {
+            return `
+              ${standard}
+              ${vcc_gnd_general('-', '')}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')})
+              `
+          }
+        }
+        else {
+          if(p.legends == true) {
+            return `
+              ${standard}
+              ${vcc_gnd_general('', '-')}
+              ${common_pins('', '-')}
+              ${vcc_gnd_specific_pins('', '-')}
+              ${common_legend('', '-', '(justify mirror)')}
+              ${vcc_gnd_specific_legend('', '-', '(justify mirror)')})
+              `
+          } else {
+            return `
+              ${standard}
+              ${vcc_gnd_general('', '-')}
+              ${common_pins('', '-')}
+              ${vcc_gnd_specific_pins('', '-')})
+              `
+          }
+        }
       }
     }
   }
