@@ -36,26 +36,33 @@ points:
     I2C_extender:
       anchor:
         ref: MCU
+        shift: [0, -3.25]
       key:
         width: 22.76
         height: 10
-        rotate: 90
+        rotate: -90
     4P4C:
       anchor:
-        ref: holes_right_bottom
-        shift: [-3.5, -8]
+        ref: MCU
+        shift: [5, 20]
       key:
         width: 10
         height: 13
         rotate: -90
-    4P4C_ExtraSafety:
+    Shottky:
       anchor:
         ref: 4P4C
-        shift: [-7, 0]
+        shift: [0, -8.5]
       key:
-        width: 12.5
-        height: 9
-        rotate: 90
+        width: 10
+        height: 2.86
+    Jumper:
+      anchor:
+        ref: MCU
+        shift: [0, 11.5]
+      key:
+        width: 5.2
+        height: 5.2
 
 outlines:
   pcb_perimeter_raw:
@@ -72,7 +79,7 @@ outlines:
         - ref: holes_right_top
           shift: [-3.5, -2.25]
         - ref: holes_left_top
-          shift: [9, -2.25]
+          shift: [8.5, -2.25]
   pcb_perimeter:
     - what: outline
       name: pcb_perimeter_raw
@@ -112,23 +119,34 @@ pcbs:
           A2: GND
           A1: GND
           A0: GND
-          RESET: VBUS
+          RESET: Vout
           NC: ''
           INT: ''
           VSS: GND
-          VDD: VBUS
-      4P4C_ExtraSafety:
-        what: 4P4C_Extra_Safety_VCC-GND
+          VDD: Vout
+      Jumper:
+        what: PinHeader_2x02
         where:
-          ref: 4P4C_ExtraSafety
+          ref: Jumper
+          shift: [-5.2/4, -5.2/4]
+          rotate: 180
         params:
           side: B
-          VOUT: VBUS
-          VIN: VSYS
+          VOUT: Vout
+          VIN: Vin
+          POWER: POWER
+      Shottky:
+        what: Shottky_1N5817
+        where:
+          ref: Shottky
+        params:
+          side: B
+          INPUT: OUTPUT
       RJ11_4P4C:
         what: RJ11_4p4c
         where:
           ref: 4P4C
+          shift: [0, 1]
         params:
           side: B
           A: POWER
@@ -143,7 +161,7 @@ pcbs:
         params:
           side: B
           flip: true
-          V5: VBUS
+          V5: Vout
           GP_EXTRA: EXTRA_0
           GND: GND
           GP14: GP0

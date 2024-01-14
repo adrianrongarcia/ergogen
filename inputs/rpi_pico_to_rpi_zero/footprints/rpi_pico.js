@@ -24,7 +24,7 @@ module.exports = {
     V3_EN: {type: 'net', value: 'V3_EN'},
     V3: {type: 'net', value: 'V3'},
     ADC_VREF: {type: 'net', value: 'ADC_VREF'},
-    GP29: {type: 'net', value: 'GP28'},
+    GP29: {type: 'net', value: 'GP29'},
     GP28: {type: 'net', value: 'GP28'},
     AGND: {type: 'net', value: 'AGND'},
     GP27: {type: 'net', value: 'GP27'},
