@@ -15,6 +15,8 @@ module.exports = {
     V5: undefined,
     GP_EXTRA: undefined,
     GND: undefined,
+    AGND: undefined,
+    GND_Optional: undefined,
     GP14: undefined,
     GP15: undefined,
     GP18: undefined,
@@ -90,7 +92,7 @@ module.exports = {
         (pad 6 thru_hole oval (at ${def_pos}2.54 5.08) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GND.str})
         (pad 7 thru_hole oval (at 0 7.62) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP4.str})
         (pad 8 thru_hole oval (at ${def_pos}2.54 7.62) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP14.str})
-        (pad 9 thru_hole oval (at 0 10.16) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GND.str})
+        (pad 9 thru_hole oval (at 0 10.16) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.AGND.str})
         (pad 10 thru_hole oval (at ${def_pos}2.54 10.16) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP15.str})
         (pad 11 thru_hole oval (at 0 12.7) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP17.str})
         (pad 12 thru_hole oval (at ${def_pos}2.54 12.7) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP18.str})
@@ -101,7 +103,7 @@ module.exports = {
         (pad 17 thru_hole oval (at 0 20.32) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.V3_AUX.str})
         (pad 18 thru_hole oval (at ${def_pos}2.54 20.32) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP24.str})
         (pad 19 thru_hole oval (at 0 22.86) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP10.str})
-        (pad 20 thru_hole oval (at ${def_pos}2.54 22.86) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GND.str})
+        (pad 20 thru_hole oval (at ${def_pos}2.54 22.86) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GND_Optional.str})
         (pad 21 thru_hole oval (at 0 25.4) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP9.str})
         (pad 22 thru_hole oval (at ${def_pos}2.54 25.4) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP25.str})
         (pad 23 thru_hole oval (at 0 27.94) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.GP11.str})
