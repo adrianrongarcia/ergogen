@@ -1,0 +1,219 @@
+points:
+  zones:
+    origin:
+      key:
+        width: 1
+        height: 1
+    holes:
+      anchor:
+        ref: origin
+        shift: [-58/2, -23/2]
+      columns:
+        left:
+        right:
+      rows:
+        bottom:
+        top:
+      key:
+        width: 6
+        height: 6
+        padding: 23
+        spread: 58
+    MCU:
+      anchor:
+        ref: origin
+        shift: [0, 3]
+        rotate: -90
+      key:
+        width: 21
+        height: 51 
+    I2C_extender:
+      anchor:
+        ref: MCU
+        shift: [0, -3.25]
+      key:
+        width: 22.76
+        height: 10
+        rotate: -90
+    pins:
+      anchor:
+        ref: origin
+        shift: [0, -23/2]
+        rotate: 90
+      key:
+        width: 5
+        height: 51
+    audio_amp:
+      anchor:
+        ref: origin
+        shift: [-0.5, -24]
+      key:
+        width: 24
+        height: 15
+    4P4C:
+      anchor:
+        ref: audio_amp
+        shift: [26, -1.5]
+      key:
+        width: 10
+        height: 13
+        rotate: -90
+    Shottky:
+      anchor:
+        ref: 4P4C
+        shift: [-8, -7]
+        rotate: 90
+      key:
+        width: 10
+        height: 2.86
+    Jumper:
+      anchor:
+        ref: 4P4C
+        shift: [0, -10]
+      key:
+        width: 5.2
+        height: 5.2
+
+outlines:
+  pcb_perimeter_raw:
+    - what: rectangle
+      where: origin
+      size: [65, 30]
+    - what: polygon
+      where: origin
+      points:
+        - ref: holes_right_bottom
+          shift: [3.5, 0]
+        - ref: holes_left_bottom
+          shift: [-3.5, 0]
+        - ref: holes_left_bottom
+          shift: [-3.5, -21]
+        - ref: holes_right_bottom
+          shift: [3.5, -21]
+    - what: rectangle
+      where: audio_amp
+      size: [24, 20]
+      adjust.shift: [-25, -1]
+      operation: subtract
+
+  pcb_rounded:
+    - what: outline
+      name: pcb_perimeter_raw
+      fillet: 3
+      
+pcbs:
+  MCU_pcb:
+    outlines:
+      main:
+        outline: pcb_rounded
+    footprints:
+      rpi_pico:
+        what: rpi_pico
+        where:
+          ref: MCU
+        params:
+          orientation: up
+          side: B
+          model: 'vcc-gnd'
+      I2C_extender:
+        what: MCP23008
+        where:
+          ref: I2C_extender
+        params:
+          side: B
+          SCL: GP21
+          SDA: GP20
+          A2: GND
+          A1: GND
+          A0: GND
+          RESET: Vout
+          NC: ''
+          INT: ''
+          VSS: GND
+          VDD: Vout
+      Jumper:
+        what: PinHeader_2x02
+        where:
+          ref: Jumper
+          shift: [5.2/4, -5.2/4]
+          rotate: 180
+        params:
+          side: F
+          VOUT: Vout
+          VIN: Vin
+          POWER: POWER
+      Shottky: 
+        what: Shottky_1N5817
+        where:
+          ref: Shottky
+        params:
+          side: F
+          INPUT: OUTPUT
+      RJ11_4P4C:
+        what: RJ11_4p4c
+        where:
+          ref: 4P4C
+          shift: [0, 1]
+        params:
+          side: F
+          A: POWER
+          B: GND
+          C: GP1
+          D: GP0
+      PAM8302:
+        what: PAM8302
+        where:
+            ref: audio_amp
+        params:
+          A_PLUS: GP5
+          A_MINUS: GND
+          SD: ""
+          Vin: POWER
+          GND: GND
+      pins:
+        what: PinHeader_2x20
+        where:
+          ref: pins
+          shift: [-2.54/2, (51/2) - (2.54/2) - 0.1]
+        params:
+          side: B
+          flip: true
+          V5: Vout
+          GP_EXTRA: EXTRA_0
+          GND: GND
+          GP14: GP0
+          GP15: GP1
+          GP18: GP13
+          GP23: GP4
+          GP24: PLUS
+          GND_Optional: MINUS
+          GP25: GP6
+          GP8: GP18
+          GP7: GP7
+          GP1: GP8
+          GP12: GP9
+          GP16: EXTRA_4
+          GP20: GP12
+          GP21: GP10
+          GP26: GP14
+          GP19: GP11
+          GP13: GP15
+          GP6: EXTRA_1
+          GP5: EXTRA_2
+          GP0: EXTRA_3
+          GP11: GP17
+          GP9: GP19
+          GP10: GP16
+          V3_AUX: ADC_VREF
+          GP22: GP26
+          GP27: GP27
+          GP17: GP28
+          AGND: AGND
+          GP4: GP22
+          GP3: GP3
+          GP2: GP2
+          V3: V3
+      mounting_holes:
+        what: MountingHole
+        where:
+          - /^holes_.*/
