@@ -2,9 +2,9 @@ module.exports = {
   params: {
     designator: 'VibrationMotor',
     side: 'F',
-    reversible: false,
-    PLUS: undefined,
-    MINUS: undefined
+    reversible: false, 
+    MOTOR_PLUS: undefined,
+    MOTOR_MINUS: undefined
   },
   body: p => {
     const standard = `
@@ -19,8 +19,8 @@ module.exports = {
     
       
       ${'' /* fooptrint pinout */}
-      (pad 1 thru_hole rect (at -1.27 12.5 ${p.rot}) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.PLUS.str})
-      (pad 2 thru_hole oval (at 1.27 12.5) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.MINUS.str})
+      (pad 1 thru_hole rect (at -1.27 12.5 ${p.rot}) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.MOTOR_PLUS.str})
+      (pad 2 thru_hole oval (at 1.27 12.5) (size 1.7 1.7) (drill 1) (layers *.Cu *.Mask) ${p.MOTOR_MINUS.str})
       `
     function side_traces(side) {
       return `

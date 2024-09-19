@@ -9,8 +9,8 @@ module.exports = {
     SD: undefined,
     Vin: undefined,
     GND: undefined,
-    PLUS: {type: 'net', value: 'PLUS'},
-    MINUS: {type: 'net', value: 'MINUS'}
+    AUDIO_PLUS: {type: 'net', value: 'AUDIO_PLUS'},
+    AUDIO_MINUS: {type: 'net', value: 'AUDIO_MINUS'}
   },
   body: p => {
     const standard = `
@@ -48,8 +48,8 @@ module.exports = {
       `
     function pins(def_neg, def_pos) {
       return `
-        (pad "+" thru_hole circle (at 8.479 ${def_neg}1.673 90) (size 2.1844 2.1844) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.PLUS.str})
-        (pad "-" thru_hole circle (at 8.479 ${def_pos}1.827 90) (size 2.1844 2.1844) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.MINUS.str})
+        (pad "+" thru_hole circle (at 8.479 ${def_neg}1.673 90) (size 2.1844 2.1844) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.AUDIO_PLUS.str})
+        (pad "-" thru_hole circle (at 8.479 ${def_pos}1.827 90) (size 2.1844 2.1844) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.AUDIO_MINUS.str})
         (pad "A+" thru_hole circle (at -8.92 ${def_neg}5.08 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.A_PLUS.str})
         (pad "A-" thru_hole circle (at -8.92 ${def_neg}2.54 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.A_MINUS.str})
         (pad "GND" thru_hole rect (at -8.92 ${def_pos}5.08 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.GND.str})
