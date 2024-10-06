@@ -17,8 +17,8 @@ module.exports = {
       (fp_text value "" (at 0 0) (layer F.Fab) (effects (font (size 1 1) (thickness 0.15))))
       
       ${'' /* fooptrint pinout */}
-      (pad "1" thru_hole rect (at 1.25995 16.12 ${p.rot}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.SPEAKER_PLUS})
-      (pad "2" thru_hole oval (at -1.28005 16.12) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.SPEAKER_MINUS})
+      (pad "1" thru_hole rect (at 1.25995 16.12 ${p.rot}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.SPEAKER_PLUS.str})
+      (pad "2" thru_hole oval (at -1.28005 16.12) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.SPEAKER_MINUS.str})
       `
     function side_traces(side) {
       return `
