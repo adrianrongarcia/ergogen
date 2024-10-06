@@ -3,6 +3,7 @@ module.exports = {
   params: {
     designator: 'PinHeader_1x05_Joystick',
     side: 'F',
+    reversible: false,
     VCC: undefined,
     GND: undefined,
     VRX: undefined,
