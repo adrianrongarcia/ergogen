@@ -1,0 +1,875 @@
+points:
+  zones:
+    main_cluster:
+      # Fix placement on KiCAD sheet.
+      anchor:
+        shift: [100, -100]
+      columns:
+        outer_pinky:
+          rows:
+            top.skip: true
+            bottom.skip: true
+          key:
+            height: 1.25u
+            column_net: P6
+        pinky:
+          rows:
+            top.skip: true
+          key:
+            stagger: u/2
+            column_net: P5
+        ring:
+          key:
+            stagger: u/4.25
+            splay: -7.5
+            spread: u + u/15
+            column_net: P4
+          rows.top.column_net: P3
+        middle:
+          key:
+            stagger: u/2.2
+            splay: -5
+            spread: u + u/20
+            column_net: P3
+          rows.top.column_net: P2
+        index:
+          key:
+            stagger: -u/2.1
+            splay: -2.5
+            column_net: P2
+          rows.top.column_net: P1
+        outer_index:
+          rows:
+            top.skip: true
+          key:
+            stagger: u/2
+            column_net: P1
+      rows:
+        bottom:
+          row_net: P10
+        middle:
+          row_net: P9
+        top:
+          row_net: P8
+      key:
+        tags: 
+          - key
+          - mx
+    thumb_cluster:
+      anchor:
+        ref: main_cluster_outer_index_bottom
+        shift: [u/4, -2.175u]
+        rotate: -5
+      columns:
+        left:
+        home:
+          key:
+            splay: -15
+            spread: u + u/8.5
+            stagger: -u/6.75
+        right:
+          key:
+            splay: -15
+            spread: u + u/8.5
+            stagger: -u/6.75
+      rows:
+      key:
+        tags:
+          - key
+          - choc
+    encoder:
+      anchor:
+        ref: thumb_cluster_home
+        shift: [0, u + 9.75]
+      key:
+        width: 35
+        height: 35
+        tags:
+          - encoder
+    diodes_right_top:
+      anchor:
+        ref: main_cluster_outer_index_middle
+        shift: [0, u/2 + 2.75]
+        rotate: 90
+      columns:
+        outer_index:
+          key.column_net: P1
+        index:
+          key.column_net: P2
+      rows:
+        bottom:
+          row_net: P10
+      key:
+        width: 2
+        height: 10
+        spread: 3
+        tags:
+          - diode
+          - main_diode
+    diodes_right_bottom:
+      anchor:
+        ref: main_cluster_outer_index_bottom
+        shift: [0, -u/2 - 2.75]
+        rotate: 90
+      columns:
+        ring:
+          key.column_net: P4
+        middle:
+          key.column_net: P3
+      rows:
+        bottom:
+          row_net: P10
+      key:
+        width: 2
+        height: 10
+        spread: -3
+        tags:
+          - diode
+          - main_diode
+    diodes_mid_bottom:
+      anchor:
+        ref: main_cluster_middle_bottom
+        shift: [0, -u/2 - 4.25]
+        rotate: 90
+      columns:
+        pinky:
+          key.column_net: P5
+      rows.bottom.row_net: P10
+      key:
+        width: 2
+        height: 10
+        tags:
+          - diode 
+          - main_diode     
+    MCU_MountingHoles_Pico:
+      anchor:
+        ref: main_cluster_index_top
+        shift: [3/2u + 7/2 + 0.5, -23 - 7/2 + u/2 -0.5]
+      columns:
+        left:
+        right:
+      rows:
+        bottom:
+        top:
+      key:
+        width: 7
+        height: 7
+        padding: 23
+        spread: 58
+        tags:
+          - mounting_hole
+          - mounting_hole_MCU
+    diodes_left_row2:
+      anchor:
+        ref: main_cluster_outer_pinky_middle
+        shift: [0.5, 1.25u/2 + 2 + 2.5]
+        rotate: 90
+      columns:
+        outer_index:
+          key.column_net: P1
+        index:
+          key.column_net: P2
+        middle:
+          key.column_net: P3
+        ring:
+          key.column_net: P4
+        pinky:
+          key.column_net: P5
+        outer_pinky:
+          key.column_net: P6
+      rows:
+        middle:
+          row_net: P9
+      key:
+        width: 2
+        height: 10
+        spread: 3
+        tags:
+          - diode
+          - main_diode
+    diodes_left_row1:
+      anchor: 
+        ref: diodes_left_row2_outer_pinky_middle
+        shift: [2/2 + 2, 0]
+      columns:
+        outer_index:
+          key.column_net: P1
+        index:
+          key.column_net: P2
+        middle:
+          key.column_net: P3
+      rows:
+        top:
+          row_net: P8
+      key:
+        width: 2
+        height: 10
+        spread: 3
+        tags:
+          - diode
+          - main_diode
+    diodes_thumb_cluster:
+      anchor:
+        ref: thumb_cluster_left
+        shift: [0, u/2 + 2 + 1.7]
+        rotate: 2
+      columns:
+      rows: 
+        1:
+        2:
+        3:
+      key:
+        width: 10
+        height: 2
+        padding: 3
+        tags:
+          - diode
+          - thumb_diode
+    MCU_MountingHoles_Extra:
+      anchor:
+        ref: MCU_MountingHoles_Pico_left_top
+        shift: [0, -49]
+      columns:
+        left:
+        right:
+      key:
+        width: 7
+        height: 7
+        spread: 58
+        tags:
+          - mounting_hole
+          - mounting_hole_MCU
+    MCU_RP_Pico:
+      anchor:
+        ref: MCU_MountingHoles_Pico_left_bottom
+        shift: [58/2, 21/2 - 1]
+      key:
+        width: 21
+        height: 51
+        rotate: 90
+    MCU_MainMatrix_Connector:
+      anchor:
+        ref: MCU_MountingHoles_Extra_left
+        shift: [0, 12.7/2 + 7/2]
+      key:
+        width: 5
+        height: 12.7
+    MCU_Speaker_Connector:
+      anchor:
+        ref: MCU_MainMatrix_Connector
+        shift: [0, 12.7/2 + 2.5/2 + 0.75]
+      key:
+        width: 2.5
+        height: 5.1
+        rotate: 90
+    MCU_SPI_Connector:
+      anchor:
+        ref: MCU_MainMatrix_Connector
+        shift: [2.5/2 + 7/2,  1.25]
+      key:
+        width: 2.5
+        height: 15.2
+    MCU_Joystick_Connector:
+      anchor:
+        ref: MCU_SPI_Connector
+        shift: [2.5 + 1, -2.5/2]
+      key:
+        width: 2.5
+        height: 12.7
+    MCU_ThumbCluster_Connector:
+      anchor:
+        ref: MCU_MountingHoles_Extra_left
+        shift: [10.2/2 + 7/2,  -7/2 + 2.5/2 + 1]
+      key:
+        width: 2.5
+        height: 10.2
+        rotate: 90
+    MCU_Encoder_Connector:
+      anchor:
+        ref: MCU_ThumbCluster_Connector
+        shift: [2.5, 0]
+      key:
+        width: 2.5
+        height: 10.2
+    MCU_PowerPin+Serial:
+      anchor: 
+        ref: MCU_MountingHoles_Pico_left_top
+        shift: [7/2 + 7.62/2, 0]
+      key:
+        width: 5
+        height: 7.62
+        rotate: 90
+    MCU_SPI_Screen:
+      anchor: 
+        ref: MCU_MountingHoles_Pico_left_top
+        shift: [7/2 + 10.2/2 + 7.62 + 12.7, 0]
+      key:
+        width: 5
+        height: 10.2
+        rotate: 90
+    4P4C_Connector:
+      anchor: 
+        ref: MCU_MountingHoles_Pico_right_bottom
+        shift: [-3, -10/2 - 7/2 - 1.5]
+      key:
+        width: 10
+        height: 13
+        rotate: 90
+    Shotky_Diode:
+      anchor:
+        ref: MCU_Joystick_Connector
+        shift: [2.5 + 1, -12.7/2 + 10/2]
+      key:
+        width: 10
+        height: 2.5
+        rotate: 90
+    Connector_Jumpers:
+      anchor:
+        ref: MCU_MountingHoles_Extra_right
+        shift: [0, 7/2 + 5/2 + 1]
+      key:
+        width: 5
+        height: 5
+        haptic_driver:
+    MCP23008:
+      anchor:
+        ref: MCU_MountingHoles_Extra_right
+        shift: [-16.5, 2.5]
+      key:
+        width: 10
+        height: 22.2
+        rotate: 90
+    DRV2605L:
+      anchor:
+        ref: MCU_MountingHoles_Pico_right_bottom
+        shift: [-18.75, -9.75]
+      key:
+        width: 17.78
+        height: 16.51
+        rotate: 0
+    PAM8302:
+      anchor:
+        ref: Shotky_Diode
+        shift: [2, -15/2 - 2.5/2 - 1.5]
+      key:
+        width: 24
+        height: 15
+    speaker_placeholder:
+      anchor:
+        ref: main_cluster_pinky_middle
+        shift: [2 + 1, 23 - 1]
+      key:
+        width: 23
+        height: 23
+    analog_input_mount_center:
+      anchor:
+        ref: thumb_cluster_left
+        rotate: 0
+        shift: [-42/2 + 3, 0]
+      key:
+        width: 42
+        height: 42
+        tags:
+          - mounting_hole
+    analog_input_mount_front:
+      anchor:
+        ref: analog_input_mount_center
+        shift: [0, 42/2 - 3]
+        orient: -90
+      key:
+        width: 6
+        height: 6
+        tags:
+          - mounting_hole
+    analog_input_mount_top:
+      anchor:
+        ref: analog_input_mount_center
+        shift: [0, 42/2 - 3]
+        orient: 30
+      key:
+        width: 6
+        height: 6
+        tags:
+          - mounting_hole
+    analog_input_mount_bottom:
+      anchor:
+        ref: analog_input_mount_center
+        shift: [0, -42/2 + 3]
+        orient: -30
+      key:
+        width: 6
+        height: 6
+        tags:
+          - mounting_hole
+    haptic_motor:
+      anchor:
+        ref: MCU_Joystick_Connector
+        shift: [3.7 - 1.75, 12.7/2 + 10/2 - 0.5]
+      key:
+        width: 8
+        height: 8
+
+outlines:
+  MCU_pcb:
+    - what: rectangle
+      where: 
+        ref: MCU_MountingHoles_Pico_left_top
+        shift: [65/2 - 7/2, -56/2 +7/2]
+      size: [65, 56]
+      operation: add
+      fillet: 3.5
+  
+  MCU_pcb_preview:
+    - what: outline 
+      name: MCU_pcb
+    - what: rectangle
+      where: mounting_hole_MCU
+      size: 3
+      fillet: 1.4
+      operation: stack
+
+  Main_cluster_pcb_raw:
+    #Adding main arcs
+    - what: circle
+      where:
+        ref: main_cluster_index_top
+        shift: [9, 18/2 -425 + 0.08]
+      radius: 425  
+    - what: circle
+      where: 
+        ref: main_cluster_index_bottom
+        shift: [9, -18/2 -350]
+      radius: 350
+      operation: subtract
+    #Adding key area outside arcs 
+    - what: rectangle 
+      where:
+        ref: main_cluster_middle_top
+      size: 18
+      operation: add
+    - what: rectangle 
+      where:
+        ref: main_cluster_pinky_bottom
+      size: 18
+      operation: add
+    #Subtracting excess right
+    - what: rectangle
+      where: 
+        ref: MCU_MountingHoles_Pico_left_top
+        shift: [7/2 + 1500/2, 7/2 - 1500/2]        
+      size: 1500
+      operation: subtract
+    - what: rectangle
+      where: 
+        ref: MCU_MountingHoles_Extra_left
+        shift: [7/2, -7/2 - 50/2]
+      size: 50
+      operation: subtract
+    #Subtracting excess left
+    - what: rectangle
+      where:
+        ref: main_cluster_outer_pinky_middle
+        shift: [-9 - 1500/2, -1500/2 + 50]
+      size: 1500
+      operation: subtract  
+    #Adding base rectangle
+    - what: rectangle
+      where:
+        ref: MCU_MountingHoles_Pico_left_top
+        shift: [-(7 + 1.5u + 0.5)/2 + 7/2, -56/2 + 7/2]
+      size: [7 + 1.5u + 0.5, 56]
+      operation: add
+  
+  Main_cluster_pcb_pretty_intermediate:
+    - what: outline
+      name: Main_cluster_pcb_raw
+      fillet: 3.75
+    #Filling unwanted big fillets
+    - what: rectangle
+      where: main_cluster_pinky_bottom
+      size: 18
+    - what: rectangle
+      where: main_cluster_middle_top
+      size: 18
+    - what: rectangle
+      where: main_cluster_outer_pinky_middle
+      size: [18, 1.2u]
+  
+  Main_cluster_pcb_pretty:
+    - what: outline
+      name: Main_cluster_pcb_pretty_intermediate
+      fillet: 3.75/2
+
+  Main_cluster_pcb_mid_raw:
+    - what: outline
+      name: Main_cluster_pcb_pretty
+    #Removing unwanted space (left)
+    - what: rectangle
+      where: 
+        ref: main_cluster_outer_pinky_middle
+        shift: [0.25, 1.25u/2 + 50/2 - 0.5]
+      size: [u + 0.5, 50]
+      operation: subtract
+    #Removing unwanted space (speaker area)
+    - what: polygon
+      points:
+        - ref: main_cluster_ring_top
+          shift: [-18/2, 18/2 + 10]
+        #- ref: main_cluster_ring_middle
+        #  shift: [-18/2, 18/2]
+        - ref: main_cluster_pinky_middle
+          shift: [18/2 + 5.3, 18/2]
+        #- ref: main_cluster_pinky_middle
+        #  shift: [18/2, 18/2] 
+        - ref: main_cluster_pinky_middle
+          shift: [-18/2 - 10, 18/2]
+        - ref: main_cluster_pinky_middle
+          shift: [-18/2 - 10, 18/2 + 40]
+      operation: subtract
+    #Removing unwanted space (middle_bot)
+    - what: polygon
+      points:
+        - ref: main_cluster_ring_bottom
+          shift: [18/2,-18/2 - 5]
+        - ref: main_cluster_ring_bottom
+          shift: [18/2, 0 + 0.55]
+        #- ref: main_cluster_middle_bottom
+        #  shift: [-18/2, -18/2]
+        #- ref: main_cluster_middle_bottom
+        #  shift: [18/2, -18/2]
+        - ref: main_cluster_index_bottom
+          shift: [-18/2, 0 - 0.35]
+        - ref: main_cluster_index_bottom
+          shift: [-18/2, -18/2 - 5]
+      operation: subtract
+    #Removing unwanted space (right bottom)
+    - what: rectangle
+      where:
+        ref: main_cluster_outer_index_bottom
+        shift: [0, -u]
+      size: u 
+      operation: subtract
+    - what: rectangle
+      where:
+        ref: main_cluster_outer_index_bottom
+        shift: [u, -u/2 -7/2 + 1.5]
+      size: [u, 2u]
+      operation: subtract
+    #Removing unwanted space (right top)
+    - what: rectangle
+      where:
+        ref: main_cluster_outer_index_middle
+        shift: [0, u]
+      size: u
+      operation: subtract
+    - what: rectangle
+      where:
+        ref: main_cluster_outer_index_middle
+        shift: [u, u/2 +7/2 + 1.5]
+      size: [u, 2u]
+      operation: subtract
+
+  Main_cluster_pcb_mid_pretty:
+    - what: outline
+      name: Main_cluster_pcb_mid_raw
+      fillet: 3.49
+    #fixing radius pinky-top
+    - what: rectangle
+      where: main_cluster_pinky_middle
+      size: 18
+      operation: add
+    #fixing radius ring-top
+    - what: rectangle
+      where: 
+        ref: main_cluster_ring_top
+        shift: [-18/2 + 3.5, 18/2 - 3.5]
+      size: 7
+    #fixing radius ring-bottom
+    - what: rectangle
+      where: 
+        ref: main_cluster_ring_bottom
+        shift: [18/2 - 3.5, -18/2 + 3.5 - 0.16]
+      size: 7
+    #fixing radius index-bottom
+    - what: rectangle
+      where: 
+        ref: main_cluster_index_bottom
+        shift: [18/2 - 3.5 - 0.5, -18/2 + 4.5]
+      size: 9
+    - what: rectangle
+      where: 
+        ref: main_cluster_index_bottom
+        shift: [-18/2 + 2.5, -18/2 + 5 - 0.27]
+      size: [5, 10]
+    #fixing radius index-top
+    - what: rectangle
+      where: 
+        ref: main_cluster_index_top
+        shift: [u/2 - 3.5, 18/2 - 3.5 + 0.05]
+      size: 7
+    #fixing radius outer index-bottom 
+    - what: rectangle
+      where: 
+        ref: main_cluster_outer_index_bottom
+      size: u
+    #fixing radius outer index-top
+    - what: rectangle
+      where: 
+        ref: main_cluster_outer_index_middle
+      size: u
+    #Applying fillet
+      fillet: 3.5/2
+  
+  Main_cluster_pcb_mid_cutouts:
+    - what: outline
+      name: Main_cluster_pcb_mid_pretty
+     #Adding switches cutouts
+    - what: rectangle
+      where: mx
+      size: 14
+      operation: subtract
+
+  Main_cluster_speaker_shield_pcb_raw:
+    - what: outline
+      name: Main_cluster_pcb_pretty
+    - what: rectangle
+      where: main_cluster_ring_top
+      size: [18, 100]
+      operation: subtract
+    - what: rectangle
+      where: main_cluster_pinky_middle
+      size: [300, 18]
+      operation: subtract
+    - what: rectangle
+      where: main_cluster_outer_pinky_middle
+      size: [u, 200]
+      operation: subtract
+    - what: rectangle
+      where: main_cluster_index_middle 
+      size: 95
+      operation: subtract
+    - what: rectangle
+      where: main_cluster_pinky_bottom
+      size: 25
+      operation: subtract
+  
+  Main_cluster_speaker_shield_pcb_pretty:
+    - what: outline
+      name: Main_cluster_speaker_shield_pcb_raw
+      fillet: 3.5/2
+    - what: rectangle
+      where:
+        ref: main_cluster_pinky_middle
+        shift: [18/2 + 4, 18/2 + 3/2]
+      size: [3.5, 3]
+      operation: subtract
+    - what: circle
+      where:
+        ref: main_cluster_pinky_middle
+        shift: [18/2 + 2.2, 18/2 + 3.5]
+      radius: 3.5
+      
+  Main_cluster_pcb_preview:
+    - what: outline
+      name: Main_cluster_pcb_pretty
+      operation: add
+    - what: rectangle
+      where: main_cluster_outer_pinky_middle
+      size: [18, 1.25*18]
+      operation: stack
+    - what: rectangle
+      where: MCU_MountingHoles_Pico_left_top
+      size: 7
+      operation: stack
+    - what: rectangle
+      where: MCU_MountingHoles_Pico_left_bottom
+      size: 7
+      operation: stack
+    - what: rectangle
+      where: MCU_MountingHoles_Extra_left
+      size: 7
+      operation: stack
+    - what: circle 
+      where: speaker_placeholder
+      radius: 23/2
+      operation: stack
+    #- what: circle
+    #  where: speaker_placeholder
+    #  radius: 25/2
+    #  operation: stack
+    - what: rectangle
+      where: main_diode
+      size: [10, 2]
+      operation: stack
+    - what: outline
+      name: Main_cluster_speaker_shield_pcb_pretty
+      operation: stack
+    - what: outline
+      name: Main_cluster_pcb_mid_cutouts
+      operation: stack
+  Thumb_Cluster_pcb_raw:
+    - what: rectangle
+      where: choc
+      size: u
+    - what: circle 
+      where: encoder
+      radius: 12.5
+    - what: rectangle
+      where: 
+        ref: MCU_MountingHoles_Extra_left
+        shift: [ 20/2 - 7/2, -20/2]
+      size: [20, 7 + 20]
+    - what: rectangle
+      where:
+        ref: encoder
+        shift: [0, -12.5]
+      size: [25, 25]
+    # Creating arc
+    - what: circle 
+      where:
+        ref: thumb_cluster_left
+        shift: [0, -91 + u/2]
+      radius: 91
+    - what: circle 
+      where:
+        ref: thumb_cluster_left
+        shift: [0, -91 + u/2]
+      radius: 91 - u 
+      operation: subtract
+    - what: rectangle
+      where:
+        ref: thumb_cluster_right
+        shift: [100/2 + u/2, -90]
+      size: [u + 100, u + 200]
+      operation: subtract
+    - what: rectangle
+      where:
+        ref: thumb_cluster_left
+        shift: [-100/2 - u/2, -90]
+      size: [u + 100, u + 200]
+      operation: subtract
+    - what: rectangle
+      where: thumb_cluster_left
+      size: u 
+    - what: rectangle
+      where: 
+        ref: thumb_cluster_right
+        shift: [-u/2, 0]
+      size: [2u, u]
+    # Filling diodes zone
+    - what: rectangle
+      where: 
+        ref: thumb_cluster_left
+        shift: [0, u]
+      size: u
+    - what: rectangle
+      where: 
+        ref: MCU_MountingHoles_Extra_left
+        shift: [ -20/2 - 7/2, 0]
+      size: [20, 7]
+      operation: subtract
+
+  Thumb_Cluster_pcb_pretty:
+    - what: outline
+      name: Thumb_Cluster_pcb_raw
+      fillet: 3.49
+     #Fixing left key fillet 
+    - what: rectangle
+      where: 
+        ref: thumb_cluster_left
+        shift: [-u/2, 0]
+      size: [u/2, u] 
+      operation: subtract
+    - what: rectangle
+      where: thumb_cluster_left
+      size: u
+    #Fixing right key fillet
+    - what: rectangle
+      where: 
+        ref: thumb_cluster_right
+        shift: [u/2, 0]
+      size: [u/2, u] 
+      operation: subtract
+    - what: rectangle
+      where: thumb_cluster_right
+      size: u
+    #Applying fillet   
+      fillet: 3.5/2
+
+  Thumb_Cluster_pcb_preview:
+    - what: outline
+      name: Thumb_Cluster_pcb_pretty  
+    #DEBUG 
+    - what: rectangle
+      where: choc
+      size: u
+      operation: stack
+    - what: circle
+      where: encoder
+      radius: 35/2
+      operation: stack
+    - what: rectangle
+      where: 
+        ref: encoder
+        rotate: 90
+      size: [17.5, 14.2]
+      operation: stack
+    - what: circle
+      where: MCU_MountingHoles_Extra_left
+      radius: 3/2
+      operation: stack
+    - what: rectangle 
+      where: MCU_ThumbCluster_Connector
+      size: [2.54, 10.2]
+      operation: stack
+    - what: rectangle 
+      where: MCU_Encoder_Connector
+      size: [2.54, 10.2]
+      operation: stack
+    - what: rectangle
+      where: thumb_diode
+      size: [10, 2]
+      operation: stack
+pcbs:
+  main_cluster:
+    outlines:
+      main:
+        outline: Main_cluster_pcb_pretty
+    footprints:
+      mx_hotspaw_reversible:
+        what: mx_reversible_hotswap
+        where: mx
+        params:
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diode:
+        what: diode
+        where: main_diode
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          rotate: 90
+      keys_pinout:
+        what: PinSocket_2x05_KeyMatrix
+        where: MCU_MainMatrix_Connector
+        params:
+          reversible: true
+        adjust:
+          shift: [-2.5, 12.7/2 -2.5/2]
+      speaker_pinout:
+        what: PinSocket_1x02_Speaker
+        where: MCU_Speaker_Connector
+        params:
+          reversible: true
+        adjust:
+           shift: [0, 5.1/2]
+      speaker:
+        what: 23mm_Speaker
+        where: speaker_placeholder
+        params:
+          reversible: true
+          SPEAKER_PLUS: SPEAKER_POSITIVE
+          SPEAKER_MINUS: SPEAKER_NEGATIVE
+        adjust:
+          rotate: 30
