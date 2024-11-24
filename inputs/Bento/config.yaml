@@ -26,6 +26,10 @@ points:
             column_net: P4
           rows.top.column_net: P3
         middle:
+          rows:
+            bottom.rotate: -90
+            middle.shift: [-u, -u]
+            top.shift: [-u, -u]
           key:
             stagger: u/2.2
             splay: -5
@@ -41,6 +45,8 @@ points:
         outer_index:
           rows:
             top.skip: true
+            middle.key.rotate: 90
+            bottom.key.rotate: -90
           key:
             stagger: u/2
             column_net: P1
@@ -52,7 +58,7 @@ points:
         top:
           row_net: P8
       key:
-        tags: 
+        tags:
           - key
           - mx
     thumb_cluster:
@@ -129,8 +135,8 @@ points:
     diodes_mid_bottom:
       anchor:
         ref: main_cluster_middle_bottom
-        shift: [0, -u/2 - 4.25]
-        rotate: 90
+        shift: [u/2 + 4.25, 0]
+        rotate: 180
       columns:
         pinky:
           key.column_net: P5
@@ -139,8 +145,8 @@ points:
         width: 2
         height: 10
         tags:
-          - diode 
-          - main_diode     
+          - diode
+          - main_diode
     MCU_MountingHoles_Pico:
       anchor:
         ref: main_cluster_index_top
@@ -188,7 +194,7 @@ points:
           - diode
           - main_diode
     diodes_left_row1:
-      anchor: 
+      anchor:
         ref: diodes_left_row2_outer_pinky_middle
         shift: [2/2 + 2, 0]
       columns:
@@ -214,7 +220,7 @@ points:
         shift: [0, u/2 + 2 + 1.7]
         rotate: 2
       columns:
-      rows: 
+      rows:
         1:
         2:
         3:
@@ -292,7 +298,7 @@ points:
         width: 2.5
         height: 10.2
     MCU_PowerPin+Serial:
-      anchor: 
+      anchor:
         ref: MCU_MountingHoles_Pico_left_top
         shift: [7/2 + 7.62/2, 0]
       key:
@@ -300,7 +306,7 @@ points:
         height: 7.62
         rotate: 90
     MCU_SPI_Screen:
-      anchor: 
+      anchor:
         ref: MCU_MountingHoles_Pico_left_top
         shift: [7/2 + 10.2/2 + 7.62 + 12.7, 0]
       key:
@@ -308,7 +314,7 @@ points:
         height: 10.2
         rotate: 90
     4P4C_Connector:
-      anchor: 
+      anchor:
         ref: MCU_MountingHoles_Pico_right_bottom
         shift: [-3, -10/2 - 7/2 - 1.5]
       key:
@@ -412,7 +418,7 @@ points:
 outlines:
   MCU_pcb:
     - what: rectangle
-      where: 
+      where:
         ref: MCU_MountingHoles_Pico_left_top
         shift: [65/2 - 7/2, -56/2 +7/2]
       size: [65, 56]
@@ -420,7 +426,7 @@ outlines:
       fillet: 3.5
   
   MCU_pcb_preview:
-    - what: outline 
+    - what: outline
       name: MCU_pcb
     - what: rectangle
       where: mounting_hole_MCU
@@ -434,33 +440,33 @@ outlines:
       where:
         ref: main_cluster_index_top
         shift: [9, 18/2 -425 + 0.08]
-      radius: 425  
+      radius: 425
     - what: circle
-      where: 
+      where:
         ref: main_cluster_index_bottom
         shift: [9, -18/2 -350]
       radius: 350
       operation: subtract
     #Adding key area outside arcs 
-    - what: rectangle 
+    - what: rectangle
       where:
         ref: main_cluster_middle_top
       size: 18
       operation: add
-    - what: rectangle 
+    - what: rectangle
       where:
         ref: main_cluster_pinky_bottom
       size: 18
       operation: add
     #Subtracting excess right
     - what: rectangle
-      where: 
+      where:
         ref: MCU_MountingHoles_Pico_left_top
-        shift: [7/2 + 1500/2, 7/2 - 1500/2]        
+        shift: [7/2 + 1500/2, 7/2 - 1500/2]
       size: 1500
       operation: subtract
     - what: rectangle
-      where: 
+      where:
         ref: MCU_MountingHoles_Extra_left
         shift: [7/2, -7/2 - 50/2]
       size: 50
@@ -471,7 +477,7 @@ outlines:
         ref: main_cluster_outer_pinky_middle
         shift: [-9 - 1500/2, -1500/2 + 50]
       size: 1500
-      operation: subtract  
+      operation: subtract
     #Adding base rectangle
     - what: rectangle
       where:
@@ -505,22 +511,20 @@ outlines:
       name: Main_cluster_pcb_pretty
     #Removing unwanted space (left)
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_outer_pinky_middle
         shift: [0.25, 1.25u/2 + 50/2 - 0.5]
       size: [u + 0.5, 50]
       operation: subtract
-    #Removing unwanted space (speaker area)
+    #Removing PART OF unwanted space (speaker area)
     - what: polygon
       points:
         - ref: main_cluster_ring_top
           shift: [-18/2, 18/2 + 10]
-        #- ref: main_cluster_ring_middle
-        #  shift: [-18/2, 18/2]
+        - ref: main_cluster_ring_middle
+          shift: [-18/2, 18]
         - ref: main_cluster_pinky_middle
-          shift: [18/2 + 5.3, 18/2]
-        #- ref: main_cluster_pinky_middle
-        #  shift: [18/2, 18/2] 
+          shift: [0, 18/2]
         - ref: main_cluster_pinky_middle
           shift: [-18/2 - 10, 18/2]
         - ref: main_cluster_pinky_middle
@@ -547,7 +551,7 @@ outlines:
       where:
         ref: main_cluster_outer_index_bottom
         shift: [0, -u]
-      size: u 
+      size: u
       operation: subtract
     - what: rectangle
       where:
@@ -580,50 +584,63 @@ outlines:
       operation: add
     #fixing radius ring-top
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_ring_top
         shift: [-18/2 + 3.5, 18/2 - 3.5]
       size: 7
     #fixing radius ring-bottom
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_ring_bottom
         shift: [18/2 - 3.5, -18/2 + 3.5 - 0.16]
       size: 7
     #fixing radius index-bottom
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_index_bottom
         shift: [18/2 - 3.5 - 0.5, -18/2 + 4.5]
       size: 9
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_index_bottom
         shift: [-18/2 + 2.5, -18/2 + 5 - 0.27]
       size: [5, 10]
     #fixing radius index-top
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_index_top
         shift: [u/2 - 3.5, 18/2 - 3.5 + 0.05]
       size: 7
     #fixing radius outer index-bottom 
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_outer_index_bottom
       size: u
     #fixing radius outer index-top
     - what: rectangle
-      where: 
+      where:
         ref: main_cluster_outer_index_middle
       size: u
-    #Applying fillet
+      #Applying fillet
       fillet: 3.5/2
+    #fixing radius speaker 
+    - what: polygon
+      points:
+        - ref: main_cluster_ring_top
+          shift: [-18/2, 18/2 + 10]
+        - ref: main_cluster_pinky_middle
+          shift: [18/2 + 5.3, 18/2]
+        - ref: main_cluster_pinky_middle
+          shift: [-18/2 - 10, 18/2]
+        - ref: main_cluster_pinky_middle
+          shift: [-18/2 - 10, 18/2 + 40]
+      operation: subtract
+      fillet: 24/2
   
   Main_cluster_pcb_mid_cutouts:
     - what: outline
       name: Main_cluster_pcb_mid_pretty
-     #Adding switches cutouts
+    #Adding switches cutouts
     - what: rectangle
       where: mx
       size: 14
@@ -645,7 +662,7 @@ outlines:
       size: [u, 200]
       operation: subtract
     - what: rectangle
-      where: main_cluster_index_middle 
+      where: main_cluster_index_middle
       size: 95
       operation: subtract
     - what: rectangle
@@ -657,18 +674,20 @@ outlines:
     - what: outline
       name: Main_cluster_speaker_shield_pcb_raw
       fillet: 3.5/2
-    - what: rectangle
-      where:
-        ref: main_cluster_pinky_middle
-        shift: [18/2 + 4, 18/2 + 3/2]
-      size: [3.5, 3]
+    - what: polygon
+      points:
+        - ref: main_cluster_ring_middle
+          shift: [-18/2, 18 - 4]
+        - ref: main_cluster_pinky_middle
+          shift: [0, 18/2 - 4]
+        - ref: main_cluster_ring_middle
       operation: subtract
     - what: circle
       where:
-        ref: main_cluster_pinky_middle
-        shift: [18/2 + 2.2, 18/2 + 3.5]
-      radius: 3.5
-      
+        ref: speaker_placeholder
+        shift: [0.75, -1]
+      radius: 24/2
+  
   Main_cluster_pcb_preview:
     - what: outline
       name: Main_cluster_pcb_pretty
@@ -689,17 +708,13 @@ outlines:
       where: MCU_MountingHoles_Extra_left
       size: 7
       operation: stack
-    - what: circle 
+    - what: circle
       where: speaker_placeholder
       radius: 23/2
       operation: stack
-    #- what: circle
-    #  where: speaker_placeholder
-    #  radius: 25/2
-    #  operation: stack
     - what: rectangle
       where: main_diode
-      size: [10, 2]
+      size: [2, 10]
       operation: stack
     - what: outline
       name: Main_cluster_speaker_shield_pcb_pretty
@@ -711,11 +726,11 @@ outlines:
     - what: rectangle
       where: choc
       size: u
-    - what: circle 
+    - what: circle
       where: encoder
       radius: 12.5
     - what: rectangle
-      where: 
+      where:
         ref: MCU_MountingHoles_Extra_left
         shift: [ 20/2 - 7/2, -20/2]
       size: [20, 7 + 20]
@@ -725,16 +740,16 @@ outlines:
         shift: [0, -12.5]
       size: [25, 25]
     # Creating arc
-    - what: circle 
+    - what: circle
       where:
         ref: thumb_cluster_left
         shift: [0, -91 + u/2]
       radius: 91
-    - what: circle 
+    - what: circle
       where:
         ref: thumb_cluster_left
         shift: [0, -91 + u/2]
-      radius: 91 - u 
+      radius: 91 - u
       operation: subtract
     - what: rectangle
       where:
@@ -750,20 +765,20 @@ outlines:
       operation: subtract
     - what: rectangle
       where: thumb_cluster_left
-      size: u 
+      size: u
     - what: rectangle
-      where: 
+      where:
         ref: thumb_cluster_right
         shift: [-u/2, 0]
       size: [2u, u]
     # Filling diodes zone
     - what: rectangle
-      where: 
+      where:
         ref: thumb_cluster_left
         shift: [0, u]
       size: u
     - what: rectangle
-      where: 
+      where:
         ref: MCU_MountingHoles_Extra_left
         shift: [ -20/2 - 7/2, 0]
       size: [20, 7]
@@ -773,32 +788,32 @@ outlines:
     - what: outline
       name: Thumb_Cluster_pcb_raw
       fillet: 3.49
-     #Fixing left key fillet 
+    #Fixing left key fillet 
     - what: rectangle
-      where: 
+      where:
         ref: thumb_cluster_left
         shift: [-u/2, 0]
-      size: [u/2, u] 
+      size: [u/2, u]
       operation: subtract
     - what: rectangle
       where: thumb_cluster_left
       size: u
     #Fixing right key fillet
     - what: rectangle
-      where: 
+      where:
         ref: thumb_cluster_right
         shift: [u/2, 0]
-      size: [u/2, u] 
+      size: [u/2, u]
       operation: subtract
     - what: rectangle
       where: thumb_cluster_right
       size: u
-    #Applying fillet   
+      #Applying fillet   
       fillet: 3.5/2
 
   Thumb_Cluster_pcb_preview:
     - what: outline
-      name: Thumb_Cluster_pcb_pretty  
+      name: Thumb_Cluster_pcb_pretty
     #DEBUG 
     - what: rectangle
       where: choc
@@ -809,7 +824,7 @@ outlines:
       radius: 35/2
       operation: stack
     - what: rectangle
-      where: 
+      where:
         ref: encoder
         rotate: 90
       size: [17.5, 14.2]
@@ -818,11 +833,11 @@ outlines:
       where: MCU_MountingHoles_Extra_left
       radius: 3/2
       operation: stack
-    - what: rectangle 
+    - what: rectangle
       where: MCU_ThumbCluster_Connector
       size: [2.54, 10.2]
       operation: stack
-    - what: rectangle 
+    - what: rectangle
       where: MCU_Encoder_Connector
       size: [2.54, 10.2]
       operation: stack
@@ -863,7 +878,7 @@ pcbs:
         params:
           reversible: true
         adjust:
-           shift: [0, 5.1/2]
+          shift: [0, 5.1/2]
       speaker:
         what: 23mm_Speaker
         where: speaker_placeholder
