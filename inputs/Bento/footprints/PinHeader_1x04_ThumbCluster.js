@@ -3,10 +3,10 @@ module.exports = {
     designator: 'PinHeader_1x04_ThumbCluster',
     side: 'F',
     reversible: false,
-    GND: undefined,
     P1: undefined,
     P2: undefined,
-    P3: undefined
+    P3: undefined,
+    P4: undefined
   },
   body: p => {
     const standard = `
