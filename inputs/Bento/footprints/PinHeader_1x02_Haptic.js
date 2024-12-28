@@ -17,7 +17,7 @@ module.exports = {
       (fp_text value "" (at 0 0) (layer F.SilkS) hide (effects (font (size 1.27 1.27) (thickness 0.15))))
       
       ${'' /* fooptrint pinout */} 
-      (pad "PLUS" thru_hole rect (at 0 0) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.HAPTIC_POSITIVE.str})
+      (pad "PLUS" thru_hole rect (at 0 0 ${p.rot}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.HAPTIC_POSITIVE.str})
       (pad "MINUS" thru_hole oval (at 0 2.54) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.HAPTIC_NEGATIVE.str})
       `
     function side_traces(side) {

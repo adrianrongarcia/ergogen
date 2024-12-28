@@ -4,6 +4,7 @@ points:
       # Fix placement on KiCAD sheet.
       anchor:
         shift: [100, -100]
+        rotate: 15
       columns:
         outer_pinky:
           rows:
@@ -330,7 +331,7 @@ points:
     Connector_Jumpers:
       anchor:
         ref: MCU_MountingHoles_Extra_right
-        shift: [0, 7/2 + 5/2 + 1]
+        shift: [0, 7/2 + 5/2]
       key:
         width: 5
         height: 5
@@ -1061,7 +1062,9 @@ pcbs:
     footprints:
       MCU:
         what: rpi_pico
-        where: MCU_RP_Pico
+        where: 
+          ref: MCU_RP_Pico
+          rotate: 180
         params:
           orientation: up
           side: F
@@ -1073,8 +1076,24 @@ pcbs:
       Main_cluster_pinheader:
         what: PinHeader_2x05_KeyMatrix
         where: 
-          - MCU_MainMatrix_Connector
-          - MCU_ThumbCluster_Connector
+          ref: MCU_MainMatrix_Connector
+          shift: [-2.54/2, 2*2.54]
+        params:
+          P1: GP5
+          P2: GP6
+          P3: GP7
+          P4: GP16
+          P5: GP17
+          P6: GP18
+          P7: GP19
+          P8: GP20
+          P9: GP21
+          P10: GP22
+      ThumbCluster_cluster_pinheader:
+        what: PinHeader_2x05_KeyMatrix
+        where:
+          ref: MCU_ThumbCluster_Connector
+          shift: [-2.54/2, 2*2.54]
         params:
           P1: GP5
           P2: GP6
@@ -1088,14 +1107,18 @@ pcbs:
           P10: GP22
       Encoder_Connector:
         what: PinHeader_1x03_Encoder
-        where: MCU_Encoder_Connector
+        where: 
+          ref: MCU_Encoder_Connector
+          shift: [0, 2.54]
         params:
           GND: GND
           DIR: GP14
           STEPS: GP15
       SPI_Connector:
         what: PinHeader_1x06_SPI
-        where: MCU_SPI_Connector
+        where: 
+          ref: MCU_SPI_Connector
+          shift: [0, 2*2.54 + 2.54/2]
         params:
           VCC: V3
           GND: GND
@@ -1105,7 +1128,9 @@ pcbs:
           SS: GP13
       Joystick_Connector:
         what: PinHeader_1x05_Joystick
-        where: MCU_Joystick_Connector
+        where: 
+          ref: MCU_Joystick_Connector
+          shift: [0, 2*2.54]
         params:
           VCC: V3
           GND: GND
@@ -1123,7 +1148,9 @@ pcbs:
           SD: GND
       Speaker_Conector:
         what: PinHeader_1x02_Speaker
-        where: MCU_Speaker_Connector
+        where: 
+          ref: MCU_Speaker_Connector
+          shift: [0, 2.54/2]
         params:
           SPEAKER_POSITIVE: AUDIO_PLUS
           SPEAKER_NEGATIVE: AUDIO_MINUS
@@ -1143,14 +1170,18 @@ pcbs:
           INPUT: Vin
       UART_Jumpers:
         what: PinHeader_2x02
-        where: Connector_Jumpers
+        where: 
+          ref: Connector_Jumpers
+          shift: [-2.54/2, 2.54/2]
         params:
           VOUT: Vout
           VIN: Vin
           POWER: Vin
       4P4C:
         what: RJ11_4p4c_reversible
-        where: 4P4C_Connector
+        where: 
+          ref: 4P4C_Connector
+          rotate: 180
         params:
           A: OUTPUT
           B: GND
@@ -1158,8 +1189,11 @@ pcbs:
           D: GP0
       Display_Connector:
         what: PinHeader_2x04_Display
-        where: MCU_Display_Connector
+        where: 
+          ref: MCU_Display_Connector
+          shift: [2.54/2, 2.54 + 2.54/2]
         params:
+          flip: true
           VCC: V3
           GND: GND
           SDA: GP2

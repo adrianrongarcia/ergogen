@@ -3,6 +3,7 @@ module.exports = {
   params: {
     designator: 'PinHeader_2x04_Display',
     side: 'F',
+    flip: false,
     reversible: false,
     VCC: undefined,
     GND: undefined,
@@ -67,11 +68,13 @@ module.exports = {
       if(p.flip == true) {
         return `
           ${standard}
+          ${outline('', '-', 'F')}
           ${pins('', '-')})
           `
       } else{
         return `
           ${standard}
+          ${outline('-', '', 'F')}
           ${pins('-', '')})
           `
       }
@@ -80,11 +83,13 @@ module.exports = {
       if (p.flip == true) {
         return `
         ${standard}
+        ${outline('-', '', 'B')}
         ${pins('-', '')})
         `
       } else {
         return `
         ${standard}
+        ${outline('', '-', 'B')}
         ${pins('', '-')})
         `
       }

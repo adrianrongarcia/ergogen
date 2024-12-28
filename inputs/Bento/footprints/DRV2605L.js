@@ -35,10 +35,10 @@ module.exports = {
         (fp_line (start -6.39 -8.255) (end 6.39 -8.255) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
         (fp_line (start -6.39 8.255) (end 6.39 8.255) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
         (fp_line (start 8.89 5.755) (end 8.89 -5.755) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
-        (fp_arc (start -8.89 -5.755) (end -6.39 -8.255) (angle 90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
-        (fp_arc (start -6.39 8.255) (end -8.89 5.755) (angle 90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
-        (fp_arc (start 6.39 -8.255) (end 8.89 -5.755) (angle 90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
-        (fp_arc (start 8.89 5.755) (end 6.39 8.255) (angle 90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
+        (fp_arc (start -6.39 -5.755) (end -6.39 -8.255) (angle -90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
+        (fp_arc (start -6.39 5.755) (end -8.89 5.755) (angle -90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
+        (fp_arc (start 6.39 -5.755) (end 8.89 -5.755) (angle -90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
+        (fp_arc (start 6.39 5.755) (end 6.39 8.255) (angle -90) (stroke (width 0.1) (type default)) (layer ${side}.SilkS))
       
         ${''/* footprint mounting holes outline */}
         (fp_circle (center -6.39 -5.755) (end -4.39 -5.755) (stroke (width 0.1) (type default)) (fill none) (layer ${side}.SilkS))
@@ -53,10 +53,10 @@ module.exports = {
         (fp_line (start -6.39 -8.755) (end 6.39 -8.755) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
         (fp_line (start -6.39 8.755) (end 6.39 8.755) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
         (fp_line (start 9.39 5.755) (end 9.39 -5.755) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
-        (fp_arc (start -9.39 -5.755) (mid -8.511322 -7.876322) (end -6.39 -8.755) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
-        (fp_arc (start -6.39 8.755) (mid -8.511321 7.876321) (end -9.39 5.755) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
-        (fp_arc (start 6.39 -8.755) (mid 8.511321 -7.876321) (end 9.39 -5.755) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
-        (fp_arc (start 9.39 5.755) (mid 8.511321 7.876321) (end 6.39 8.755) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
+        (fp_arc (start -6.39 -5.755) (end -6.39 -8.755) (angle -90) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
+        (fp_arc (start -6.39 5.755) (end -9.39 5.755) (angle -90) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
+        (fp_arc (start 6.39 -5.755) (end 9.39 -5.755) (angle -90) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
+        (fp_arc (start 6.39 5.755) (end 6.39 8.755) (angle -90) (stroke (width 0.05) (type default)) (layer ${side}.CrtYd))
         `
     }
 
@@ -65,7 +65,7 @@ module.exports = {
         (pad "+" thru_hole rect (at ${def_pos}2.5 -6.35 ${p.rot + 90}) (size 2 2) (drill 1) (layers "*.Cu" "*.Mask") ${p.MOTOR_PLUS.str})
         (pad "-" thru_hole rect (at ${def_neg}2.5 -6.35 ${p.rot + 90}) (size 2 2) (drill 1) (layers "*.Cu" "*.Mask") ${p.MOTOR_MINUS.str})
         
-        (pad "Vin" thru_hole rect (at ${def_neg}5.09 6.35 90) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.Vin.str})
+        (pad "Vin" thru_hole rect (at ${def_neg}5.09 6.35 ${p.rot}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.Vin.str})
         (pad "GND" thru_hole oval (at ${def_neg}2.55 6.35 90) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.GND.str})
         (pad "SCL" thru_hole oval (at 0.0 6.35 90) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.SCL.str})
         (pad "SDA" thru_hole oval (at ${def_pos}2.53 6.35 90) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.SDA.str})
@@ -89,29 +89,6 @@ module.exports = {
         (fp_line (start ${def_neg}3.82 7.68) (end ${def_pos}6.4 7.68) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
         (fp_line (start ${def_neg}3.82 5.02) (end ${def_pos}6.4 5.02) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
         (fp_line (start ${def_neg}3.82 7.68) (end ${def_neg}3.82 5.02) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
-        
-        ${''/* output symbols */}
-        (fp_circle (center 5.31 ${def_neg}1.673) (end 6.0917 ${def_neg}1.673) (stroke (width 0.2032) (type solid)) (fill none) (layer ${side}.SilkS))
-        (fp_line (start 4.9132 ${def_neg}1.673) (end 5.7069 ${def_neg}1.673) (stroke (width 0.3048) (type solid)) (layer ${side}.SilkS))
-        (fp_line (start 5.31 ${def_neg}1.2762) (end 5.31 ${def_neg}2.0698) (stroke (width 0.3048) (type solid)) (layer ${side}.SilkS))
-        
-        (fp_circle (center 5.36 ${def_pos}1.827) (end 6.1417 ${def_pos}1.827) (stroke (width 0.2032) (type solid)) (fill none) (layer ${side}.SilkS))
-        (fp_line (start 5.7568 ${def_pos}1.827) (end 4.9631 ${def_pos}1.827) (stroke (width 0.3048) (type solid)) (layer ${side}.SilkS))
-      
-        ${''/* Pin_Header 1X05 representation*/}
-        (fp_line (start -10.25 ${def_pos}3.81) (end -10.25 ${def_neg}6.41) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS)) 
-        (fp_line (start -7.59 ${def_neg}6.41) (end -10.25 ${def_neg}6.41) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
-        (fp_line (start -7.59 ${def_pos}3.81) (end -10.25 ${def_pos}3.81) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
-        (fp_line (start -7.59 ${def_pos}3.81) (end -7.59 ${def_neg}6.41) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
-        (fp_line (start -7.59 ${def_pos}5.08) (end -7.59 ${def_pos}6.41) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
-        (fp_line (start -7.59 ${def_pos}6.41) (end -8.92 ${def_pos}6.41) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
-        
-        ${''/* Pin_Header 1X05 fab info*/} 
-        (fp_line (start -10.19 ${def_neg}6.35) (end -7.65 ${def_neg}6.35) (stroke (width 0.1) (type solid)) (layer ${side}.Fab))
-        (fp_line (start -10.19 ${def_pos}6.35) (end -10.19 ${def_neg}6.35) (stroke (width 0.1) (type solid)) (layer ${side}.Fab))
-        (fp_line (start -8.285 ${def_pos}6.35) (end -10.19 ${def_pos}6.35) (stroke (width 0.1) (type solid)) (layer ${side}.Fab))
-        (fp_line (start -7.65 ${def_neg}6.35) (end -7.65 ${def_pos}5.715) (stroke (width 0.1) (type solid)) (layer ${side}.Fab))
-        (fp_line (start -7.65 ${def_pos}5.715) (end -8.285 ${def_pos}6.35) (stroke (width 0.1) (type solid)) (layer ${side}.Fab))
         `
     }
 
@@ -149,7 +126,7 @@ module.exports = {
             ${outline('', '-', 'B')}
             ${legend('', '-', '', 'F')}
             ${legend('', '-', '(justify mirror)', 'B')}
-          `
+          )`
         } else {
           return `
             ${standard}
@@ -158,7 +135,7 @@ module.exports = {
             ${pins('', '-')}
             ${outline('', '-', 'F')}
             ${outline('', '-', 'B')}
-          `
+          )`
         }
       } else {
         if (p.legends = true) {
@@ -169,7 +146,7 @@ module.exports = {
               ${pins('', '-')}
               ${outline('', '-', p.side)}
               ${legend('', '-', '', p.side)}
-            `
+            )`
           } else {
             return `
               ${standard}
@@ -177,7 +154,7 @@ module.exports = {
               ${pins('', '-')}
               ${outline('', '-', p.side)}
               ${legend('', '-', '(justify mirror)', p.side)}
-            `
+            )`
           }
         } else {
           return `
@@ -185,7 +162,7 @@ module.exports = {
             ${core(p.side)}
             ${pins('', '-')}
             ${outline('', '-', p.side)}
-          `
+          )`
         }
       }
     } else {
@@ -200,7 +177,7 @@ module.exports = {
             ${outline('-', '', 'B')}
             ${legend('-', '', '', 'F')}
             ${legend('-', '', '(justify mirror)', 'B')}
-          `
+          )`
         } else {
           return `
             ${standard}
@@ -209,7 +186,7 @@ module.exports = {
             ${pins('-', '')}
             ${outline('-', '', 'F')}
             ${outline('-', '', 'B')}
-          `
+          )`
         }
       } else {
         if (p.legends = true) {
@@ -220,7 +197,7 @@ module.exports = {
               ${pins('', '-')}
               ${outline('', '-', p.side)}
               ${legend('', '-', '', p.side)}
-            `
+            )`
           } else {
             return `
               ${standard}
@@ -228,7 +205,7 @@ module.exports = {
               ${pins('', '-')}
               ${outline('', '-', p.side)}
               ${legend('', '-', '(justify mirror)', p.side)}
-            `
+            )`
           }
         } else {
           return `
@@ -236,7 +213,7 @@ module.exports = {
             ${core(p.side)}
             ${pins('-', '')}
             ${outline('-', '', p.side)}
-          `
+          )`
         }
       }
     }

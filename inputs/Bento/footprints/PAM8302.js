@@ -52,7 +52,7 @@ module.exports = {
         (pad "-" thru_hole circle (at 8.479 ${def_pos}1.827 90) (size 2.1844 2.1844) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.AUDIO_MINUS.str})
         (pad "A+" thru_hole circle (at -8.92 ${def_neg}5.08 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.A_PLUS.str})
         (pad "A-" thru_hole circle (at -8.92 ${def_neg}2.54 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.A_MINUS.str})
-        (pad "GND" thru_hole rect (at -8.92 ${def_pos}5.08 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.GND.str})
+        (pad "GND" thru_hole rect (at -8.92 ${def_pos}5.08 ${p.rot + 180}) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.GND.str})
         (pad "SD" thru_hole circle (at -8.92 0 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.SD.str})
         (pad "Vin" thru_hole circle (at -8.92 ${def_pos}2.54 180) (size 1.778 1.778) (drill 1) (layers "*.Cu" "*.Mask") (solder_mask_margin 0.0508) ${p.Vin.str})
         `

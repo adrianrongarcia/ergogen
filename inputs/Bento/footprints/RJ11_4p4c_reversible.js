@@ -40,8 +40,8 @@ module.exports = {
     (fp_line (start -5.5 7.5) (end 5.5 7.5) (stroke (width 0.05) (type default)) (layer "F.CrtYd"))
     (fp_line (start 5.5 -1.5) (end 5.5 -6.5) (stroke (width 0.05) (type default)) (layer "F.CrtYd"))
     (fp_line (start 5.5 7.5) (end 5.5 1.5) (stroke (width 0.05) (type default)) (layer "F.CrtYd"))
-    (fp_arc (start -6.02 1.58) (mid -7.6 0) (end -6.02 -1.58) (stroke (width 0.05) (type default)) (layer "F.CrtYd"))
-    (fp_arc (start 5.5 -1.5) (mid 6.579848 0) (end 5.5 1.5) (stroke (width 0.05) (type default)) (layer "F.CrtYd"))
+    (fp_arc (start -6.02 0) (end -6.02 1.58) (angle 180) (stroke (width 0.05) (type default)) (layer "F.CrtYd"))
+    (fp_arc (start 5 0) (end 5.5 -1.5) (angle 143) (stroke (width 0.05) (type default)) (layer "F.CrtYd"))
     
     ${'' /* footprint Limits (Back) */}
     (fp_line (start -6.52 -1.5) (end -6.52 -6.5) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
@@ -52,8 +52,8 @@ module.exports = {
     (fp_line (start 4.48 7.5) (end 4.48 1.58) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
     (fp_line (start 5 -1.58) (end 4.48 -1.58) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
     (fp_line (start 5 1.58) (end 4.48 1.58) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
-    (fp_arc (start -6.52 1.5) (mid -7.599849 0) (end -6.52 -1.5) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
-    (fp_arc (start 5 -1.58) (mid 6.58 0) (end 5 1.58) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
+    (fp_arc (start -6.02 0) (end -6.52 1.5) (angle 143) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
+    (fp_arc (start 5 0) (end 5 1.58) (angle 180) (stroke (width 0.05) (type default)) (layer "B.CrtYd"))
     
     ${'' /* footprint Fab traces (Front) */}
     (fp_line (start -5 7) (end -5 -6) (stroke (width 0.15) (type default)) (layer "F.Fab"))
@@ -68,7 +68,6 @@ module.exports = {
     (fp_line (start 3.98 7) (end 3.98 -6) (stroke (width 0.15) (type default)) (layer "B.Fab"))
     
     ${'' /* footprint Jumpers (Front) */}
-    (stroke (width 0.1) (type solid)) (fill solid) (layer "F.Mask"))
     (fp_poly
     (pts
       (xy 0.002 -0.502)
@@ -78,7 +77,16 @@ module.exports = {
     )
     (stroke (width 0.1) (type solid)) (fill solid) (layer "F.Mask"))
     
-    (pad "" smd custom (at -1.54 -0.756 180) (size 1.2 0.5) (layers "F.Cu" "F.Mask")
+    (fp_poly
+    (pts
+      (xy -2.048 -0.502)
+      (xy -1.032 -0.502)
+      (xy -1.032 0.514)
+      (xy -2.048 0.514)
+    )
+    (stroke (width 0.1) (type solid)) (fill solid) (layer "F.Mask"))
+    
+    (pad "" smd custom (at -1.54 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "F.Cu" "F.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -92,7 +100,7 @@ module.exports = {
         )
         (width 0) (fill yes))))
         
-    (pad "" smd custom (at -1.54 0.26 180) (size 0.1 0.1) (layers "F.Cu" "F.Mask")
+    (pad "" smd custom (at -1.54 0.26 ${p.rot + 180}) (size 0.1 0.1) (layers "F.Cu" "F.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -106,7 +114,7 @@ module.exports = {
         )
         (width 0) (fill yes))))
         
-    (pad "" smd custom (at 0.51 -0.756 180) (size 1.2 0.5) (layers "F.Cu" "F.Mask")
+    (pad "" smd custom (at 0.51 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "F.Cu" "F.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -120,7 +128,7 @@ module.exports = {
         )
         (width 0) (fill yes))))
         
-    (pad "" smd custom (at 0.51 0.26 180) (size 0.1 0.1) (layers "F.Cu" "F.Mask")
+    (pad "" smd custom (at 0.51 0.26 ${p.rot + 180}) (size 0.1 0.1) (layers "F.Cu" "F.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -151,15 +159,8 @@ module.exports = {
       (xy 0.002 0.514)
     )
     (stroke (width 0.1) (type solid)) (fill solid) (layer "B.Mask"))
-    (fp_poly
-    (pts
-      (xy -2.048 -0.502)
-      (xy -1.032 -0.502)
-      (xy -1.032 0.514)
-      (xy -2.048 0.514)
-    )
 
-    (pad "" smd custom (at -1.54 -0.756 180) (size 1.2 0.5) (layers "B.Cu" "B.Mask")
+    (pad "" smd custom (at -1.54 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "B.Cu" "B.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -173,7 +174,7 @@ module.exports = {
         )
         (width 0) (fill yes))))
     
-    (pad "" smd custom (at -1.54 0.26 180) (size 0.1 0.1) (layers "B.Cu" "B.Mask")
+    (pad "" smd custom (at -1.54 0.26 ${p.rot + 180}) (size 0.1 0.1) (layers "B.Cu" "B.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -187,7 +188,7 @@ module.exports = {
         )
         (width 0) (fill yes))))
     
-    (pad "" smd custom (at 0.51 -0.756 180) (size 1.2 0.5) (layers "B.Cu" "B.Mask")
+    (pad "" smd custom (at 0.51 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "B.Cu" "B.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -201,7 +202,7 @@ module.exports = {
         )
         (width 0) (fill yes)))) 
         
-    (pad "" smd custom (at 0.51 0.26 180) (size 0.1 0.1) (layers "B.Cu" "B.Mask")
+    (pad "" smd custom (at 0.51 0.26 ${p.rot + 180}) (size 0.1 0.1) (layers "B.Cu" "B.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
     (primitives
@@ -231,18 +232,18 @@ module.exports = {
     (fp_line (start 0.51 2.3) (end -1.54 0.26) (stroke (width 0.2) (type default)) (layer "B.Cu"))
     
     ${'' /* footprint jumper wiring connectors */}
-    (pad "GND" thru_hole circle (at 0.51 -1.756 180) (size 0.6 0.6) (drill 0.3) (layers "*.Cu" "*.Mask") (zone_connect 0) (thermal_bridge_angle 90))
-    (pad "VCC" thru_hole circle (at -1.54 -1.756 180) (size 0.6 0.6) (drill 0.3) (layers "*.Cu" "*.Mask") (zone_connect 0) (thermal_bridge_angle 90))
+    (pad "GND" thru_hole circle (at 0.51 -1.756 180) (size 0.6 0.6) (drill 0.3) (layers "*.Cu" "*.Mask") (zone_connect 0) (thermal_bridge_angle 90) ${p.B.str})
+    (pad "VCC" thru_hole circle (at -1.54 -1.756 180) (size 0.6 0.6) (drill 0.3) (layers "*.Cu" "*.Mask") (zone_connect 0) (thermal_bridge_angle 90) ${p.A.str})
     
     ${'' /* footprint user help text (Front)*/}
-    (fp_text user "L" (at -3.64 0.42 unlocked) (layer "F.SilkS") (effects (font (size 1 1) (thickness 0.1)) (justify left bottom)))
-    (fp_text user "R" (at 1.53 0.47 unlocked) (layer "F.SilkS") (effects (font (size 1 1) (thickness 0.1)) (justify left bottom)))
+    (fp_text user "L" (at -3.64 0.42 ${p.rot} unlocked) (layer "F.SilkS") (effects (font (size 1 1) (thickness 0.1)) (justify left bottom)))
+    (fp_text user "R" (at 1.39 0.47 ${p.rot} unlocked) (layer "F.SilkS" knockout) (effects (font (size 1 1) (thickness 0.1)) (justify left bottom)))
     
     (fp_rect (start -2.34 -1.2) (end -0.74 0.86) (stroke (width 0.1) (type default)) (fill none) (layer "F.SilkS"))
     
     ${'' /* footprint user help text (Back)*/}
-    (fp_text user "L" (at 2.63 0.46 unlocked) (layer "B.SilkS") (effects (font (size 1 1) (thickness 0.1)) (justify left bottom mirror)))
-    (fp_text user "R" (at -2.56 0.42 unlocked) (layer "B.SilkS") (effects (font (size 1 1) (thickness 0.1)) (justify left bottom mirror)))
+    (fp_text user "L" (at 2.63 0.46 ${p.rot} unlocked) (layer "B.SilkS") (effects (font (size 1 1) (thickness 0.1)) (justify left bottom mirror)))
+    (fp_text user "R" (at -2.45 0.42 ${p.rot} unlocked) (layer "B.SilkS" knockout) (effects (font (size 1 1) (thickness 0.1)) (justify left bottom mirror)))
     
     (fp_rect (start -0.29 -1.2) (end 1.31 0.86) (stroke (width 0.1) (type default)) (fill none) (layer "B.SilkS"))
       
@@ -253,10 +254,10 @@ module.exports = {
     (pad "" np_thru_hole circle (at 5 0) (size 2.3 2.3) (drill 2.3) (layers "F&B.Cu" "*.Mask"))
       
     ${'' /* fooptrint solder mounting holes */}
-    (pad "" thru_hole roundrect (at -1.53 2.3) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask") (roundrect_rratio 0.1388888889))
+    (pad "" thru_hole roundrect (at -1.53 2.3 ${p.rot}) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask") (roundrect_rratio 0.1388888889))
     (pad "" thru_hole circle (at 0.51 2.3) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask"))
-    (pad "RX" thru_hole circle (at -2.55 4.84) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask"))
-    (pad "RX" thru_hole circle (at 1.53 4.84) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask"))
-    (pad "TX" thru_hole circle (at -0.51 4.84) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask"))
-  `
+    (pad "RX" thru_hole circle (at -2.55 4.84) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask") ${p.D.str})
+    (pad "RX" thru_hole circle (at 1.53 4.84) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask") ${p.D.str})
+    (pad "TX" thru_hole circle (at -0.51 4.84) (size 1.7 1.7) (drill 0.8) (layers "*.Cu" "*.Mask") ${p.C.str})
+  )`
 }

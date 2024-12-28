@@ -4,6 +4,7 @@ module.exports = {
     designator: 'PinSocket_2x04_Display',
     side: 'F',
     reversible: false,
+    flip: false,
     VCC: {type: 'net', value: 'VCC'},
     GND: {type: 'net', value: 'GND'},
     SDA: {type: 'net', value: 'SDA'},
@@ -67,11 +68,13 @@ module.exports = {
       if(p.flip == true) {
         return `
           ${standard}
+          ${outline('', '-', 'F')}
           ${pins('', '-')})
           `
       } else{
         return `
           ${standard}
+          ${outline('-', '', 'F')}
           ${pins('-', '')})
           `
       }
@@ -80,11 +83,13 @@ module.exports = {
       if (p.flip == true) {
         return `
         ${standard}
+        ${outline('-', '', 'B')}
         ${pins('-', '')})
         `
       } else {
         return `
         ${standard}
+        ${outline('', '-', 'B')}
         ${pins('', '-')})
         `
       }
