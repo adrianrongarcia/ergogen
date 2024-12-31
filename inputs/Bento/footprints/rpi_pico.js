@@ -16,6 +16,7 @@ module.exports = {
     model: 'default',
     SMD: false,
     legends: true,
+    reversible: false,
     VBUS: {type: 'net', value: 'VBUS'},
     VSYS: {type: 'net', value: 'VSYS'},
     Vin: {type: 'net', value: 'Vin'},
@@ -64,50 +65,50 @@ module.exports = {
       (fp_text reference "${p.ref}" (at 0 0) (layer F.SilkS) ${p.ref_hide} (effects (font (size 1.27 1.27) (thickness 0.15))))
       (fp_text value "" (at 0 0) (layer F.SilkS) hide (effects (font (size 1.27 1.27) (thickness 0.15))))
       `
-    function SMD(def_neg, def_pos) {
+    function SMD(def_neg, def_pos, side) {
       return `
         ${''/* SMD Pads */}
-        (pad 1 smd rect (at ${def_neg}8.89 -24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 2 smd rect (at ${def_neg}8.89 -21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 3 smd rect (at ${def_neg}8.89 -19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 4 smd rect (at ${def_neg}8.89 -16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 5 smd rect (at ${def_neg}8.89 -13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 6 smd rect (at ${def_neg}8.89 -11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 7 smd rect (at ${def_neg}8.89 -8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 8 smd rect (at ${def_neg}8.89 -6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 9 smd rect (at ${def_neg}8.89 -3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 10 smd rect (at ${def_neg}8.89 -1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 11 smd rect (at ${def_neg}8.89 1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 12 smd rect (at ${def_neg}8.89 3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 13 smd rect (at ${def_neg}8.89 6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 14 smd rect (at ${def_neg}8.89 8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 15 smd rect (at ${def_neg}8.89 11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 16 smd rect (at ${def_neg}8.89 13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 17 smd rect (at ${def_neg}8.89 16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 18 smd rect (at ${def_neg}8.89 19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 19 smd rect (at ${def_neg}8.89 21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 20 smd rect (at ${def_neg}8.89 24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
+        (pad 1 smd rect (at ${def_neg}8.89 -24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 2 smd rect (at ${def_neg}8.89 -21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 3 smd rect (at ${def_neg}8.89 -19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 4 smd rect (at ${def_neg}8.89 -16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 5 smd rect (at ${def_neg}8.89 -13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 6 smd rect (at ${def_neg}8.89 -11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 7 smd rect (at ${def_neg}8.89 -8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 8 smd rect (at ${def_neg}8.89 -6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 9 smd rect (at ${def_neg}8.89 -3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 10 smd rect (at ${def_neg}8.89 -1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 11 smd rect (at ${def_neg}8.89 1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 12 smd rect (at ${def_neg}8.89 3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 13 smd rect (at ${def_neg}8.89 6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 14 smd rect (at ${def_neg}8.89 8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 15 smd rect (at ${def_neg}8.89 11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 16 smd rect (at ${def_neg}8.89 13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 17 smd rect (at ${def_neg}8.89 16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 18 smd rect (at ${def_neg}8.89 19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 19 smd rect (at ${def_neg}8.89 21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 20 smd rect (at ${def_neg}8.89 24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_neg}0.9 0)) (layers ${side}.Cu ${side}.Mask))
       
-        (pad 21 smd rect (at ${def_pos}8.89 24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 22 smd rect (at ${def_pos}8.89 21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 23 smd rect (at ${def_pos}8.89 19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 24 smd rect (at ${def_pos}8.89 16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 25 smd rect (at ${def_pos}8.89 13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 26 smd rect (at ${def_pos}8.89 11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 27 smd rect (at ${def_pos}8.89 8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 28 smd rect (at ${def_pos}8.89 6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 29 smd rect (at ${def_pos}8.89 3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 30 smd rect (at ${def_pos}8.89 1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 31 smd rect (at ${def_pos}8.89 -1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 32 smd rect (at ${def_pos}8.89 -3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 33 smd rect (at ${def_pos}8.89 -6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 34 smd rect (at ${def_pos}8.89 -8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 35 smd rect (at ${def_pos}8.89 -11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 36 smd rect (at ${def_pos}8.89 -13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 37 smd rect (at ${def_pos}8.89 -16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 38 smd rect (at ${def_pos}8.89 -19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 39 smd rect (at ${def_pos}8.89 -21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
-        (pad 40 smd rect (at ${def_pos}8.89 -24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${p.side}.Cu ${p.side}.Mask))
+        (pad 21 smd rect (at ${def_pos}8.89 24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 22 smd rect (at ${def_pos}8.89 21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 23 smd rect (at ${def_pos}8.89 19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 24 smd rect (at ${def_pos}8.89 16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 25 smd rect (at ${def_pos}8.89 13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 26 smd rect (at ${def_pos}8.89 11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 27 smd rect (at ${def_pos}8.89 8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 28 smd rect (at ${def_pos}8.89 6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 29 smd rect (at ${def_pos}8.89 3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 30 smd rect (at ${def_pos}8.89 1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 31 smd rect (at ${def_pos}8.89 -1.27 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 32 smd rect (at ${def_pos}8.89 -3.81 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 33 smd rect (at ${def_pos}8.89 -6.35 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 34 smd rect (at ${def_pos}8.89 -8.89 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 35 smd rect (at ${def_pos}8.89 -11.43 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 36 smd rect (at ${def_pos}8.89 -13.97 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 37 smd rect (at ${def_pos}8.89 -16.51 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 38 smd rect (at ${def_pos}8.89 -19.05 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 39 smd rect (at ${def_pos}8.89 -21.59 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
+        (pad 40 smd rect (at ${def_pos}8.89 -24.13 ${p.rot}) (size 3.5 1.7) (drill (offset ${def_pos}0.9 0)) (layers ${side}.Cu ${side}.Mask))
         `
     }
     function SMD_up_EdgeCut() {
@@ -156,32 +157,32 @@ module.exports = {
         (fp_rect (start -7.5 -27.3) (end 7.5 24.75) (stroke (width 0.12) (type solid)) (fill solid) (layer Edge.Cuts))
       `
     }
-    function default_common_elements(def_neg, def_pos) {
+    function default_common_elements(def_neg, def_pos, side) {
       return `
         ${'' /* component outline*/}
-        (fp_line (start -10.5 -25.5) (end 10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start -10.5 -25.5) (end 10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
         
         ${''/* extra border around "GP0", for extra distinctive info */}
-        (fp_line (start ${def_neg}7.493 -22.833) (end ${def_neg}7.493 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_neg}10.5 -22.833) (end ${def_neg}7.493 -22.833) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS)) 
+        (fp_line (start ${def_neg}7.493 -22.833) (end ${def_neg}7.493 -25.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start ${def_neg}10.5 -22.833) (end ${def_neg}7.493 -22.833) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS)) 
         
         ${''/* footprint limits*/}
-        (fp_line (start -11 -26) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start -11 26) (end -11 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start -4.16 -27.3) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start -4.16 -27.3) (end 4.18 -27.3) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 4.18 -27.3) (end 4.18 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 4.18 -26) (end 11 -26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 11 -26) (end 11 26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
-        (fp_line (start 11 26) (end -11 26) (stroke (width 0.12) (type solid)) (layer ${p.side}.CrtYd))
+        (fp_line (start -11 -26) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
+        (fp_line (start -11 26) (end -11 -26) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
+        (fp_line (start -4.16 -27.3) (end -4.16 -26) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
+        (fp_line (start -4.16 -27.3) (end 4.18 -27.3) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
+        (fp_line (start 4.18 -27.3) (end 4.18 -26) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
+        (fp_line (start 4.18 -26) (end 11 -26) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
+        (fp_line (start 11 -26) (end 11 26) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
+        (fp_line (start 11 26) (end -11 26) (stroke (width 0.12) (type solid)) (layer ${side}.CrtYd))
       
         ${''/* fabrication info*/}
-        (fp_line (start -10.5 -25.5) (end 10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start ${def_neg}10.5 -24.2) (end ${def_neg}9.2 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start -10.5 25.5) (end -10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start 10.5 -25.5) (end 10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
-        (fp_line (start 10.5 25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.Fab))
+        (fp_line (start -10.5 -25.5) (end 10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${side}.Fab))
+        (fp_line (start ${def_neg}10.5 -24.2) (end ${def_neg}9.2 -25.5) (stroke (width 0.12) (type solid)) (layer ${side}.Fab))
+        (fp_line (start -10.5 25.5) (end -10.5 -25.5) (stroke (width 0.12) (type solid)) (layer ${side}.Fab))
+        (fp_line (start 10.5 -25.5) (end 10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${side}.Fab))
+        (fp_line (start 10.5 25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${side}.Fab))
         
         ${'' /* user drawings for USB area */}
         (fp_poly
@@ -194,17 +195,17 @@ module.exports = {
         (stroke (width 0.1) (type solid)) (fill solid) (layer Dwgs.User))
         `
     }
-    function vcc_gnd_general (def_neg, def_pos){
+    function vcc_gnd_general (def_neg, def_pos, side){
       return ` 
         ${'' /* footprint outline */}
-        (fp_line (start ${def_neg}11.43 -26.67) (end ${def_neg}11.43 26.67) (stroke (width 0.12) (type default)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_neg}11.43 -26.67) (end ${def_pos}11.43 -26.67) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_neg}10.16 -25.4) (end ${def_neg}7.62 -25.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_neg}10.16 -22.86) (end ${def_neg}10.16 -25.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_neg}10.16 -22.86) (end ${def_neg}7.62 -22.86) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_neg}7.62 -22.86) (end ${def_neg}7.62 -25.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_pos}11.43 26.67) (end ${def_neg}11.43 26.67) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start ${def_pos}11.43 26.67) (end ${def_pos}11.43 -26.67) (stroke (width 0.12) (type default)) (layer ${p.side}.SilkS))
+        (fp_line (start ${def_neg}11.43 -26.67) (end ${def_neg}11.43 26.67) (stroke (width 0.12) (type default)) (layer ${side}.SilkS))
+        (fp_line (start ${def_neg}11.43 -26.67) (end ${def_pos}11.43 -26.67) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start ${def_neg}10.16 -25.4) (end ${def_neg}7.62 -25.4) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start ${def_neg}10.16 -22.86) (end ${def_neg}10.16 -25.4) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start ${def_neg}10.16 -22.86) (end ${def_neg}7.62 -22.86) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start ${def_neg}7.62 -22.86) (end ${def_neg}7.62 -25.4) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start ${def_pos}11.43 26.67) (end ${def_neg}11.43 26.67) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start ${def_pos}11.43 26.67) (end ${def_pos}11.43 -26.67) (stroke (width 0.12) (type default)) (layer ${side}.SilkS))
         
         ${'' /* footprint user drawing for USB C */}
         (fp_poly
@@ -303,394 +304,554 @@ module.exports = {
         (pad 40 thru_hole oval (at ${def_pos}8.89 -24.13) (size 1.7 1.7) (drill 1.02) (layers *.Cu *.Mask) ${p.Vout.str})
         `
     }
-    function default_outline_standard(def_neg, def_pos) {
+    function default_outline_standard(def_neg, def_pos, side) {
       return `
         ${'' /* component outline*/}
-        (fp_line (start -10.5 -25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -25.5) (end 10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start -10.5 -25.5) (end -10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -25.5) (end 10.5 25.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
       `
     }
-    function default_outline_SMD(def_neg, def_pos) {
+    function default_outline_SMD(def_neg, def_pos, side) {
       return `
         ${'' /* component outline*/}
-        (fp_line (start -10.5 -25.5) (end -10.5 -25.2) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -23.1) (end -10.5 -22.7) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -20.5) (end -10.5 -20.1) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -18) (end -10.5 -17.6) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -15.4) (end -10.5 -15) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -12.9) (end -10.5 -12.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -10.4) (end -10.5 -10) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -7.8) (end -10.5 -7.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -5.3) (end -10.5 -4.9) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -2.7) (end -10.5 -2.3) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 -0.2) (end -10.5 0.2) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 2.3) (end -10.5 2.7) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 4.9) (end -10.5 5.3) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 7.4) (end -10.5 7.8) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 10) (end -10.5 10.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 12.5) (end -10.5 12.9) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 15.1) (end -10.5 15.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 17.6) (end -10.5 18) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 20.1) (end -10.5 20.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start -10.5 22.7) (end -10.5 23.1) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -25.5) (end 10.5 -25.2) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -23.1) (end 10.5 -22.7) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -20.5) (end 10.5 -20.1) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -18) (end 10.5 -17.6) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -15.4) (end 10.5 -15) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -12.9) (end 10.5 -12.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -10.4) (end 10.5 -10) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -7.8) (end 10.5 -7.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -5.3) (end 10.5 -4.9) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -2.7) (end 10.5 -2.3) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 -0.2) (end 10.5 0.2) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 2.3) (end 10.5 2.7) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 4.9) (end 10.5 5.3) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 7.4) (end 10.5 7.8) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 10) (end 10.5 10.4) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 12.5) (end 10.5 12.9) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 15.1) (end 10.5 15.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 17.6) (end 10.5 18) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 20.1) (end 10.5 20.5) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
-        (fp_line (start 10.5 22.7) (end 10.5 23.1) (stroke (width 0.12) (type solid)) (layer ${p.side}.SilkS))
+        (fp_line (start -10.5 -25.5) (end -10.5 -25.2) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -23.1) (end -10.5 -22.7) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -20.5) (end -10.5 -20.1) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -18) (end -10.5 -17.6) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -15.4) (end -10.5 -15) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -12.9) (end -10.5 -12.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -10.4) (end -10.5 -10) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -7.8) (end -10.5 -7.4) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -5.3) (end -10.5 -4.9) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -2.7) (end -10.5 -2.3) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 -0.2) (end -10.5 0.2) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 2.3) (end -10.5 2.7) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 4.9) (end -10.5 5.3) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 7.4) (end -10.5 7.8) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 10) (end -10.5 10.4) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 12.5) (end -10.5 12.9) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 15.1) (end -10.5 15.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 17.6) (end -10.5 18) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 20.1) (end -10.5 20.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start -10.5 22.7) (end -10.5 23.1) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -25.5) (end 10.5 -25.2) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -23.1) (end 10.5 -22.7) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -20.5) (end 10.5 -20.1) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -18) (end 10.5 -17.6) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -15.4) (end 10.5 -15) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -12.9) (end 10.5 -12.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -10.4) (end 10.5 -10) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -7.8) (end 10.5 -7.4) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -5.3) (end 10.5 -4.9) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -2.7) (end 10.5 -2.3) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 -0.2) (end 10.5 0.2) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 2.3) (end 10.5 2.7) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 4.9) (end 10.5 5.3) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 7.4) (end 10.5 7.8) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 10) (end 10.5 10.4) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 12.5) (end 10.5 12.9) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 15.1) (end 10.5 15.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 17.6) (end 10.5 18) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 20.1) (end 10.5 20.5) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
+        (fp_line (start 10.5 22.7) (end 10.5 23.1) (stroke (width 0.12) (type solid)) (layer ${side}.SilkS))
         `
     }
-    function common_legend(def_neg, def_pos, def_text_mirror) {
+    function common_legend(def_neg, def_pos, def_text_mirror, side) {
       return `
         ${''/* pin names */}
-        (fp_text user GND (at ${def_pos}6.7 -19.05 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GND (at ${def_pos}6.7 -19.05 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
-        (fp_text user 3V3 (at ${def_pos}6.8 -13.9 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user 3V3 (at ${def_pos}6.8 -13.9 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
-        (fp_text user GP28 (at ${def_pos}6.4 -8.8 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user AGND (at ${def_pos}6.4 -6.35 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP27 (at ${def_pos}6.4 -3.8 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP26 (at ${def_pos}6.4 -1.27 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user RUN (at ${def_pos}6.7 1.27 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP22 (at ${def_pos}6.4 3.81 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GND (at ${def_pos}6.7 6.35 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP21 (at ${def_pos}6.4 8.9 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP20 (at ${def_pos}6.4 11.43 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP19 (at ${def_pos}6.4 13.97 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP18 (at ${def_pos}6.4 16.6 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GND (at ${def_pos}6.7 19.05 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP17 (at ${def_pos}6.4 21.6 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP16 (at ${def_pos}6.4 24.13 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP28 (at ${def_pos}6.4 -8.8 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user AGND (at ${def_pos}6.4 -6.35 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP27 (at ${def_pos}6.4 -3.8 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP26 (at ${def_pos}6.4 -1.27 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user RUN (at ${def_pos}6.7 1.27 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP22 (at ${def_pos}6.4 3.81 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GND (at ${def_pos}6.7 6.35 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP21 (at ${def_pos}6.4 8.9 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP20 (at ${def_pos}6.4 11.43 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP19 (at ${def_pos}6.4 13.97 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP18 (at ${def_pos}6.4 16.6 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GND (at ${def_pos}6.7 19.05 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP17 (at ${def_pos}6.4 21.6 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP16 (at ${def_pos}6.4 24.13 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
-        (fp_text user GP15 (at ${def_neg}6.4 24.13 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP14 (at ${def_neg}6.4 21.59 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GND (at ${def_neg}6.7 19.05 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP13 (at ${def_neg}6.4 16.51 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP12 (at ${def_neg}6.4 13.97 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP11 (at ${def_neg}6.4 11.43 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP10 (at ${def_neg}6.4 8.89 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GND (at ${def_neg}6.7 6.35 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP9 (at ${def_neg}6.7 3.8 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP8 (at ${def_neg}6.7 1.27 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP7 (at ${def_neg}6.7 -1.2 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP6 (at ${def_neg}6.7 -3.81 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GND (at ${def_neg}6.7 -6.35 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP5 (at ${def_neg}6.7 -8.89 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP4 (at ${def_neg}6.7 -11.43 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP3 (at ${def_neg}6.7 -13.97 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP2 (at ${def_neg}6.7 -16.51 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GND (at ${def_neg}6.7 -19.05 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP1 (at ${def_neg}6.7 -21.6 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user GP0 (at ${def_neg}6 -24.13 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP15 (at ${def_neg}6.4 24.13 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP14 (at ${def_neg}6.4 21.59 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GND (at ${def_neg}6.7 19.05 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP13 (at ${def_neg}6.4 16.51 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP12 (at ${def_neg}6.4 13.97 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP11 (at ${def_neg}6.4 11.43 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP10 (at ${def_neg}6.4 8.89 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GND (at ${def_neg}6.7 6.35 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP9 (at ${def_neg}6.7 3.8 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP8 (at ${def_neg}6.7 1.27 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP7 (at ${def_neg}6.7 -1.2 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP6 (at ${def_neg}6.7 -3.81 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GND (at ${def_neg}6.7 -6.35 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP5 (at ${def_neg}6.7 -8.89 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP4 (at ${def_neg}6.7 -11.43 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP3 (at ${def_neg}6.7 -13.97 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP2 (at ${def_neg}6.7 -16.51 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GND (at ${def_neg}6.7 -19.05 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP1 (at ${def_neg}6.7 -21.6 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP0 (at ${def_neg}6 -24.13 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         `
     }
-    function default_specific_legend(def_neg, def_pos, def_text_mirror) {
+    function default_specific_legend(def_neg, def_pos, def_text_mirror, side) {
       return `
         ${''/* pin names */}
-        (fp_text user VBUS (at ${def_pos}6.38 -24.11 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user VSYS (at ${def_pos}6.4 -21.59 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user VBUS (at ${def_pos}6.38 -24.11 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user VSYS (at ${def_pos}6.4 -21.59 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
-        (fp_text user 3V3_EN (at ${def_pos}5.7 -16.5 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user 3V3_EN (at ${def_pos}5.7 -16.5 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
-        (fp_text user ADC_VREF (at ${def_pos}5 -11.4 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user ADC_VREF (at ${def_pos}5 -11.4 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         `
     }
-    function vcc_gnd_specific_legend(def_neg, def_pos, def_text_mirror) {
+    function vcc_gnd_specific_legend(def_neg, def_pos, def_text_mirror, side) {
       return `
         ${''/* pin names */}
-        (fp_text user Vout (at ${def_pos}6.4 -24.11 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
-        (fp_text user Vin (at ${def_pos}7 -21.59 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user Vout (at ${def_pos}6.4 -24.11 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user Vin (at ${def_pos}7 -21.59 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
-        (fp_text user GP23 (at ${def_pos}6.4 -16.5 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP23 (at ${def_pos}6.4 -16.5 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         
-        (fp_text user GP29 (at ${def_pos}6.4 -11.4 ${p.rot}) (layer ${p.side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
+        (fp_text user GP29 (at ${def_pos}6.4 -11.4 ${p.rot}) (layer ${side}.SilkS) (effects (font (size 0.8 0.8) (thickness 0.15)) ${def_text_mirror}))
         `
     }
     if(p.model == 'default') {
-      if(p.SMD == true) {
-        if(p.orientation == 'down') {
-          if(p.side == 'F'){
-            if(p.legends == true) {
+      if (p.reversible == true) {
+        if (p.orientation == 'down') {
+          if (p.SMD == true) {
+            if (p.legends == true) {
               return `
                 ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_SMD('', '-')}
+                ${default_common_elements('', '-', 'F')}
+                ${default_common_elements('', '-', 'B')}
+                ${default_outline_SMD('', '-', 'F')}
+                ${default_outline_SMD('', '-', 'B')}
                 ${common_pins('', '-')}
-                ${default_specific_pins('', '-')}
-                ${SMD('', '-')}
-                ${SMD_down_EdgeCut()}
-                ${common_legend('', '-', '')}
-                ${default_specific_legend('', '-', '')})
+                ${SMD('', '-', 'F')}
+                ${SMD('', '-', 'B')}
+                ${SMD_down_EdgeCut}
+                ${common_legend('', '-', '', 'F')}
+                ${common_legend('', '-', '(justify mirror)', 'B')}
+                ${default_specific_legend('', '-', '', 'F')}
+                ${default_specific_legend('', '-', '(justify mirror)', 'B')}
                 `
             } else {
               return `
                 ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_SMD('', '-')}
+                ${default_common_elements('', '-', 'F')}
+                ${default_common_elements('', '-', 'B')}
+                ${default_outline_SMD('', '-', 'F')}
+                ${default_outline_SMD('', '-', 'B')}
                 ${common_pins('', '-')}
-                ${default_specific_pins('', '-')}
-                ${SMD('', '-')}
-                ${SMD_down_EdgeCut})
+                ${SMD('', '-', 'F')}
+                ${SMD('', '-', 'B')}
+                ${SMD_down_EdgeCut}
                 `
             }
-          }
-          else {
-            if(p.legends == true) {
+          } else {
+            if (p.legends == true) {
               return `
                 ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_SMD('-', '')}
-                ${common_pins('-', '')}
-                ${default_specific_pins('-', '')}
-                ${SMD('-', '')}
-                ${SMD_down_EdgeCut()}
-                ${common_legend('-', '', '(justify mirror)')}
-                ${default_specific_legend('-', '', '(justify mirror)')})
+                ${default_common_elements('', '-', 'F')}
+                ${default_common_elements('', '-', 'B')}
+                ${default_outline_standard('', '-', 'F')}
+                ${default_outline_SMD('', '-', 'B')}
+                ${common_pins('', '-')}
+                ${common_legend('', '-', '', 'F')}
+                ${common_legend('', '-', '(justify mirror)', 'B')}
+                ${default_specific_legend('', '-', '', 'F')}
+                ${default_specific_legend('', '-', '(justify mirror)', 'B')}
                 `
             } else {
               return `
                 ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_SMD('-', '')}
-                ${common_pins('-', '')}
-                ${default_specific_pins('-', '')}
-                ${SMD('-', '')}
-                ${SMD_down_EdgeCut()})
+                ${default_common_elements('', '-', 'F')}
+                ${default_common_elements('', '-', 'B')}
+                ${default_outline_SMD('', '-', 'F')}
+                ${default_outline_SMD('', '-', 'B')}
+                ${common_pins('', '-')}
                 `
             }
           }
         } else {
-          if(p.side == 'F'){
-            if(p.legends == true) {
+          if (p.SMD == true) {
+            if (p.legends == true) {
               return `
                 ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_SMD('-', '')}
+                ${default_common_elements('-', '', 'F')}
+                ${default_common_elements('-', '', 'B')}
+                ${default_outline_SMD('-', '', 'F')}
+                ${default_outline_SMD('-', '', 'B')}
                 ${common_pins('-', '')}
-                ${default_specific_pins('-', '')}
-                ${SMD('-', '')}
-                ${SMD_up_EdgeCut()}
-                ${common_legend('-', '', '')}
-                ${default_specific_legend('-', '', '')})
+                ${SMD('-', '', 'F')}
+                ${SMD('-', '', 'B')}
+                ${SMD_down_EdgeCut}
+                ${common_legend('-', '', '', 'F')}
+                ${common_legend('-', '', '(justify mirror)', 'B')}
+                ${default_specific_legend('-', '', '', 'F')}
+                ${default_specific_legend('-', '', '(justify mirror)', 'B')}
                 `
             } else {
               return `
                 ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_SMD('-', '')}
+                ${default_common_elements('-', '', 'F')}
+                ${default_common_elements('-', '', 'B')}
+                ${default_outline_SMD('-', '', 'F')}
+                ${default_outline_SMD('-', '', 'B')}
                 ${common_pins('-', '')}
-                ${default_specific_pins('-', '')}
-                ${SMD('-', '')}
-                ${SMD_up_EdgeCut()})
+                ${SMD('-', '', 'F')}
+                ${SMD('-', '', 'B')}
+                ${SMD_down_EdgeCut}
                 `
             }
-          }
-          else {
-            if(p.legends == true) {
+          } else {
+            if (p.legends == true) {
               return `
                 ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_SMD('', '-')}
-                ${common_pins('', '-')}
-                ${default_specific_pins('', '-')}
-                ${SMD('', '-')}
-                ${SMD_up_EdgeCut()}
-                ${common_legend('', '-', '(justify mirror)')}
-                ${default_specific_legend('', '-', '(justify mirror)')})
+                ${default_common_elements('-', '', 'F')}
+                ${default_common_elements('-', '', 'B')}
+                ${default_outline_SMD('-', '', 'F')}
+                ${default_outline_SMD('-', '', 'B')}
+                ${common_pins('-', '')}
+                ${common_legend('-', '', '', 'F')}
+                ${common_legend('-', '', '(justify mirror)', 'B')}
+                ${default_specific_legend('-', '', '', 'F')}
+                ${default_specific_legend('-', '', '(justify mirror)', 'B')}
                 `
             } else {
               return `
                 ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_SMD('', '-')}
-                ${common_pins('', '-')}
-                ${default_specific_pins('', '-')}
-                ${SMD('', '-')}
-                ${SMD_up_EdgeCut()})
+                ${default_common_elements('-', '', 'F')}
+                ${default_common_elements('-', '', 'B')}
+                ${default_outline_SMD('-', '', 'F')}
+                ${default_outline_SMD('-', '', 'B')}
+                ${common_pins('-', '')}
                 `
             }
           }
         }
       } else {
-        if(p.orientation == 'down') {
-          if(p.side == 'F'){
-            if(p.legends == true) {
-              return `
+        if (p.SMD == true) {
+          if (p.orientation == 'down') {
+            if (p.side == 'F') {
+              if (p.legends == true) {
+                return `
                 ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_standard('', '-')}
+                ${default_common_elements('', '-', p.side)}
+                ${default_outline_SMD('', '-', p.side)}
                 ${common_pins('', '-')}
                 ${default_specific_pins('', '-')}
-                ${common_legend('', '-', '')}
-                ${default_specific_legend('', '-', '')})
+                ${SMD('', '-', p.side)}
+                ${SMD_down_EdgeCut()}
+                ${common_legend('', '-', '', p.side)}
+                ${default_specific_legend('', '-', '', p.side)})
                 `
-            } else {
-              return `
+              } else {
+                return `
                 ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_standard('', '-')}
+                ${default_common_elements('', '-', p.side)}
+                ${default_outline_SMD('', '-', p.side)}
                 ${common_pins('', '-')}
-                ${default_specific_pins('', '-')})
+                ${default_specific_pins('', '-')}
+                ${SMD('', '-', p.side)}
+                ${SMD_down_EdgeCut})
                 `
-            }
-          }
-          else {
-            if(p.legends == true) {
-              return `
+              }
+            } else {
+              if (p.legends == true) {
+                return `
                 ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_standard('-', '')}
+                ${default_common_elements('-', '', p.side)}
+                ${default_outline_SMD('-', '', p.side)}
                 ${common_pins('-', '')}
                 ${default_specific_pins('-', '')}
-                ${common_legend('-', '', '(justify mirror)')}
-                ${default_specific_legend('-', '', '(justify mirror)')})
+                ${SMD('-', '', p.side)}
+                ${SMD_down_EdgeCut()}
+                ${common_legend('-', '', '(justify mirror)', p.side)}
+                ${default_specific_legend('-', '', '(justify mirror)', p.side)})
                 `
-            } else {
-              return `
+              } else {
+                return `
                 ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_standard('-', '')}
+                ${default_common_elements('-', '', p.side)}
+                ${default_outline_SMD('-', '', p.side)}
                 ${common_pins('-', '')}
-                ${default_specific_pins('-', '')})
+                ${default_specific_pins('-', '')}
+                ${SMD('-', '', p.side)}
+                ${SMD_down_EdgeCut()})
                 `
+              }
+            }
+          } else {
+            if (p.side == 'F') {
+              if (p.legends == true) {
+                return `
+                ${standard}
+                ${default_common_elements('-', '', p.side)}
+                ${default_outline_SMD('-', '', p.side)}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${SMD('-', '', p.side)}
+                ${SMD_up_EdgeCut()}
+                ${common_legend('-', '', '', p.side)}
+                ${default_specific_legend('-', '', '', p.side)})
+                `
+              } else {
+                return `
+                ${standard}
+                ${default_common_elements('-', '', p.side)}
+                ${default_outline_SMD('-', '', p.side)}
+                ${common_pins('-', '')}
+                ${default_specific_pins('-', '')}
+                ${SMD('-', '', p.side)}
+                ${SMD_up_EdgeCut()})
+                `
+              }
+            } else {
+              if (p.legends == true) {
+                return `
+                ${standard}
+                ${default_common_elements('', '-', p.side)}
+                ${default_outline_SMD('', '-', p.side)}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${SMD('', '-', p.side)}
+                ${SMD_up_EdgeCut()}
+                ${common_legend('', '-', '(justify mirror)', p.side)}
+                ${default_specific_legend('', '-', '(justify mirror)', p.side)})
+                `
+              } else {
+                return `
+                ${standard}
+                ${default_common_elements('', '-', p.side)}
+                ${default_outline_SMD('', '-', p.side)}
+                ${common_pins('', '-')}
+                ${default_specific_pins('', '-')}
+                ${SMD('', '-', p.side)}
+                ${SMD_up_EdgeCut()})
+                `
+              }
             }
           }
         } else {
-          if(p.side == 'F'){
-            if(p.legends == true) {
-              return `
-                ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_standard('-', '')}
-                ${common_pins('-', '')}
-                ${default_specific_pins('-', '')}
-                ${common_legend('-', '', '')}
-                ${default_specific_legend('-', '', '')})
-                `
+          if (p.orientation == 'down') {
+            if (p.side == 'F') {
+              if (p.legends == true) {
+                return `
+                  ${standard}
+                  ${default_common_elements('', '-', p.side)}
+                  ${default_outline_standard('', '-', p.side)}
+                  ${common_pins('', '-')}
+                  ${default_specific_pins('', '-')}
+                  ${common_legend('', '-', '', p.side)}
+                  ${default_specific_legend('', '-', '', p.side)})
+                  `
+              } else {
+                return `
+                  ${standard}
+                  ${default_common_elements('', '-', p.side)}
+                  ${default_outline_standard('', '-', p.side)}
+                  ${common_pins('', '-')}
+                  ${default_specific_pins('', '-')})
+                  `
+              }
             } else {
-              return `
-                ${standard}
-                ${default_common_elements('-', '')}
-                ${default_outline_standard('-', '')}
-                ${common_pins('-', '')}
-                ${default_specific_pins('-', '')})
-                `
+              if (p.legends == true) {
+                return `
+                  ${standard}
+                  ${default_common_elements('-', '', p.side)}
+                  ${default_outline_standard('-', '', p.side)}
+                  ${common_pins('-', '')}
+                  ${default_specific_pins('-', '')}
+                  ${common_legend('-', '', '(justify mirror)', p.side)}
+                  ${default_specific_legend('-', '', '(justify mirror)', p.side)})
+                  `
+              } else {
+                return `
+                  ${standard}
+                  ${default_common_elements('-', '', p.side)}
+                  ${default_outline_standard('-', '', p.side)}
+                  ${common_pins('-', '')}
+                  ${default_specific_pins('-', '')})
+                  `
+              }
             }
-          }
-          else {
-            if(p.legends == true) {
-              return `
-                ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_standard('', '-')}
-                ${common_pins('', '-')}
-                ${default_specific_pins('', '-')}
-                ${common_legend('', '-', '(justify mirror)')}
-                ${default_specific_legend('', '-', '(justify mirror)')})
-                `
+          } else {
+            if (p.side == 'F') {
+              if (p.legends == true) {
+                return `
+                  ${standard}
+                  ${default_common_elements('-', '', p.side)}
+                  ${default_outline_standard('-', '', p.side)}
+                  ${common_pins('-', '')}
+                  ${default_specific_pins('-', '')}
+                  ${common_legend('-', '', '', p.side)}
+                  ${default_specific_legend('-', '', '', p.side)})
+                  `
+              } else {
+                return `
+                  ${standard}
+                  ${default_common_elements('-', '', p.side)}
+                  ${default_outline_standard('-', '', p.side)}
+                  ${common_pins('-', '')}
+                  ${default_specific_pins('-', '')})
+                  `
+              }
             } else {
-              return `
-                ${standard}
-                ${default_common_elements('', '-')}
-                ${default_outline_standard('', '-')}
-                ${common_pins('', '-')}
-                ${default_specific_pins('', '-')})
-                `
+              if (p.legends == true) {
+                return `
+                  ${standard}
+                  ${default_common_elements('', '-', p.side)}
+                  ${default_outline_standard('', '-', p.side)}
+                  ${common_pins('', '-')}
+                  ${default_specific_pins('', '-')}
+                  ${common_legend('', '-', '(justify mirror)', p.side)}
+                  ${default_specific_legend('', '-', '(justify mirror)', p.side)})
+                  `
+              } else {
+                return `
+                  ${standard}
+                  ${default_common_elements('', '-', p.side)}
+                  ${default_outline_standard('', '-', p.side)}
+                  ${common_pins('', '-')}
+                  ${default_specific_pins('', '-')})
+                  `
+              }
             }
           }
         }
       }
     } else if(p.model == 'vcc-gnd') {
-      if(p.orientation == 'down') {
-        if(p.side == 'F') {
+      if (p.reversible == true) { 
+        if (p.orientation == 'down') {
           if(p.legends == true) {
             return `
               ${standard}
-              ${vcc_gnd_general('', '-')}
+              ${vcc_gnd_general('', '-', 'F')}
+              ${vcc_gnd_general('', '-', 'B')}
               ${common_pins('', '-')}
               ${vcc_gnd_specific_pins('', '-')}
-              ${common_legend('', '-', '')}
-              ${vcc_gnd_specific_legend('', '-', '')})
+              ${common_legend('', '-', '', 'F')}
+              ${common_legend('', '-', '(justify mirror)', 'B')}
+              ${vcc_gnd_specific_legend('', '-', '', 'F')}
+              ${vcc_gnd_specific_legend('', '-', '(justify mirror)', 'B')})
               `
-          } else {
+          } else{
             return `
               ${standard}
-              ${vcc_gnd_general('', '-')}
+              ${vcc_gnd_general('', '-', 'F')}
+              ${vcc_gnd_general('', '-', 'B')}
+              ${common_pins('', '-')}
+              ${vcc_gnd_specific_pins('', '-')})
+              `
+          }
+        } else{
+          if (p.legends == true) {
+            return `
+              ${standard}
+              ${vcc_gnd_general('-', '', 'F')}
+              ${vcc_gnd_general('-', '', 'B')}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')}
+              ${common_legend('-', '', '', 'F')}
+              ${common_legend('-', '', '(justify mirror)', 'B')}
+              ${vcc_gnd_specific_legend('-', '', '', 'F')}
+              ${vcc_gnd_specific_legend('-', '', '(justify mirror)', 'B')})
+              `
+          } else{
+            return `
+              ${standard}
+              ${vcc_gnd_general('-', '', 'F')}
+              ${vcc_gnd_general('-', '', 'B')}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')})
+              `
+          }
+        }
+      }
+      else{
+        if(p.orientation == 'down') {
+          if(p.side == 'F') {
+            if(p.legends == true) {
+              return `
+              ${standard}
+              ${vcc_gnd_general('', '-', p.side)}
+              ${common_pins('', '-')}
+              ${vcc_gnd_specific_pins('', '-')}
+              ${common_legend('', '-', '', p.side)}
+              ${vcc_gnd_specific_legend('', '-', '', p.side)})
+              `
+            } else {
+              return `
+              ${standard}
+              ${vcc_gnd_general('', '-', p.side)}
               ${common_pins('', '-')}
               ${vcc_gnd_specific_pins('', '-')})
               `
             }
+          } else {
+            if(p.legends == true) {
+              return `
+              ${standard}
+              ${vcc_gnd_general('-', '', p.side)}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')}
+              ${common_legend('-', '', '(justify mirror)', p.side)}
+              ${vcc_gnd_specific_legend('-', '', '(justify mirror)', p.side)})
+              `
+            } else {
+              return `
+              ${standard}
+              ${vcc_gnd_general('-', '', p.side)}
+              ${common_pins('-', '')}
+              ${vcc_gnd_specific_pins('-', '')})
+              `
+            }
+          }
         } else {
-          if(p.legends == true) {
-            return `
+          if(p.side == 'F'){
+            if(p.legends == true) {
+              return `
               ${standard}
-              ${vcc_gnd_general('-', '')}
+              ${vcc_gnd_general('-', '', p.side)}
               ${common_pins('-', '')}
               ${vcc_gnd_specific_pins('-', '')}
-              ${common_legend('-', '', '(justify mirror)')}
-              ${vcc_gnd_specific_legend('-', '', '(justify mirror)')})
+              ${common_legend('-', '', '', p.side)}
+              ${vcc_gnd_specific_legend('-', '', '', p.side)})
               `
-          } else {
-            return `
+            } else {
+              return `
               ${standard}
-              ${vcc_gnd_general('-', '')}
+              ${vcc_gnd_general('-', '', p.side)}
               ${common_pins('-', '')}
               ${vcc_gnd_specific_pins('-', '')})
               `
-          }
-        }
-      } else {
-        if(p.side == 'F'){
-          if(p.legends == true) {
-            return `
-              ${standard}
-              ${vcc_gnd_general('-', '')}
-              ${common_pins('-', '')}
-              ${vcc_gnd_specific_pins('-', '')}
-              ${common_legend('-', '', '')}
-              ${vcc_gnd_specific_legend('-', '', '')})
-              `
+            }
           } else {
-            return `
+            if(p.legends == true) {
+              return `
               ${standard}
-              ${vcc_gnd_general('-', '')}
-              ${common_pins('-', '')}
-              ${vcc_gnd_specific_pins('-', '')})
-              `
-          }
-        }
-        else {
-          if(p.legends == true) {
-            return `
-              ${standard}
-              ${vcc_gnd_general('', '-')}
+              ${vcc_gnd_general('', '-', p.side)}
               ${common_pins('', '-')}
               ${vcc_gnd_specific_pins('', '-')}
-              ${common_legend('', '-', '(justify mirror)')}
-              ${vcc_gnd_specific_legend('', '-', '(justify mirror)')})
+              ${common_legend('', '-', '(justify mirror)', p.side)}
+              ${vcc_gnd_specific_legend('', '-', '(justify mirror)', p.side)})
               `
-          } else {
-            return `
+            } else {
+              return `
               ${standard}
-              ${vcc_gnd_general('', '-')}
+              ${vcc_gnd_general('', '-', p.side)}
               ${common_pins('', '-')}
               ${vcc_gnd_specific_pins('', '-')})
               `
+            }
           }
         }
       }

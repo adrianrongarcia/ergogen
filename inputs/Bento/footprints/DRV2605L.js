@@ -115,7 +115,7 @@ module.exports = {
     }
 
     if (p.flip == true) {
-      if (p.rev = true) {
+      if (p.reversible = true) {
         if (p.legends = true) {
           return `
             ${standard}
@@ -166,7 +166,7 @@ module.exports = {
         }
       }
     } else {
-      if (p.rev = true) {
+      if (p.reversible = true) {
         if (p.legends = true) {
           return `
             ${standard}

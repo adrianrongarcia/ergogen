@@ -89,6 +89,7 @@ module.exports = {
     (pad "" smd custom (at -1.54 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "F.Cu" "F.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
+    ${p.A.str}
     (primitives
       (gr_poly
         (pts
@@ -117,6 +118,7 @@ module.exports = {
     (pad "" smd custom (at 0.51 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "F.Cu" "F.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
+    ${p.B.str}
     (primitives
       (gr_poly
         (pts
@@ -162,7 +164,8 @@ module.exports = {
 
     (pad "" smd custom (at -1.54 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "B.Cu" "B.Mask")
     (zone_connect 0)
-    (options (clearance outline) (anchor rect))
+    (options (clearance outline) (anchor rect)) 
+    ${p.A.str}
     (primitives
       (gr_poly
         (pts
@@ -191,6 +194,7 @@ module.exports = {
     (pad "" smd custom (at 0.51 -0.756 ${p.rot + 180}) (size 1.2 0.5) (layers "B.Cu" "B.Mask")
     (zone_connect 0)
     (options (clearance outline) (anchor rect))
+    ${p.B.str}
     (primitives
       (gr_poly
         (pts
@@ -217,23 +221,12 @@ module.exports = {
         (width 0) (fill yes))))
     
     ${'' /* footprint jumper traces (Front) */}
-    (fp_line (start -2.55 4.84) (end -1.29 3.58) (stroke (width 0.2) (type default)) (layer "F.Cu"))
-    (fp_line (start -1.54 -1.756) (end -1.54 -0.756) (stroke (width 0.2) (type default)) (layer "F.Cu"))
     (fp_line (start -1.54 0.26) (end -1.54 2.36) (stroke (width 0.2) (type default)) (layer "F.Cu"))
     (fp_line (start -1.53 2.3) (end 0.51 0.26) (stroke (width 0.2) (type default)) (layer "F.Cu"))
-    (fp_line (start -1.29 3.58) (end 0.27 3.58) (stroke (width 0.2) (type default)) (layer "F.Cu"))
-    (fp_line (start 0.51 -1.756) (end 0.51 -0.756) (stroke (width 0.2) (type default)) (layer "F.Cu"))
-    (fp_line (start 1.53 4.84) (end 0.27 3.58) (stroke (width 0.2) (type default)) (layer "F.Cu"))
     
     ${'' /* footprint jumper traces (Back) */}
-    (fp_line (start -1.54 -1.756) (end -1.54 -0.756) (stroke (width 0.2) (type default)) (layer "B.Cu"))
-    (fp_line (start 0.51 -1.756) (end 0.51 -0.756) (stroke (width 0.2) (type default)) (layer "B.Cu"))
     (fp_line (start 0.51 0.26) (end 0.51 2.3) (stroke (width 0.2) (type default)) (layer "B.Cu"))
     (fp_line (start 0.51 2.3) (end -1.54 0.26) (stroke (width 0.2) (type default)) (layer "B.Cu"))
-    
-    ${'' /* footprint jumper wiring connectors */}
-    (pad "GND" thru_hole circle (at 0.51 -1.756 180) (size 0.6 0.6) (drill 0.3) (layers "*.Cu" "*.Mask") (zone_connect 0) (thermal_bridge_angle 90) ${p.B.str})
-    (pad "VCC" thru_hole circle (at -1.54 -1.756 180) (size 0.6 0.6) (drill 0.3) (layers "*.Cu" "*.Mask") (zone_connect 0) (thermal_bridge_angle 90) ${p.A.str})
     
     ${'' /* footprint user help text (Front)*/}
     (fp_text user "L" (at -3.64 0.42 ${p.rot} unlocked) (layer "F.SilkS") (effects (font (size 1 1) (thickness 0.1)) (justify left bottom)))

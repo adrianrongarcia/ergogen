@@ -64,35 +64,53 @@ module.exports = {
         (pad "SS" thru_hole oval (at ${def_pos}2.54 7.62) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${p.SS.str})
         `
     }
-    if(p.side == 'F') {
+    if(p.reversible == true) {
       if(p.flip == true) {
         return `
-          ${standard}
-          ${outline('', '-', 'F')}
-          ${pins('', '-')})
-          `
-      } else{
-        return `
-          ${standard}
-          ${outline('-', '', 'F')}
-          ${pins('-', '')})
-          `
-      }
-    }
-    else {
-      if (p.flip == true) {
-        return `
         ${standard}
-        ${outline('-', '', 'B')}
-        ${pins('-', '')})
+        ${pins('', '-')}
+        ${outline('', '-', 'F')}
+        ${outline('', '-', 'B')})
         `
       } else {
         return `
         ${standard}
-        ${outline('', '-', 'B')}
-        ${pins('', '-')})
+        ${pins('-', '')}
+        ${outline('-', '', 'F')}
+        ${outline('-', '', 'B')})
         `
       }
-    }  
+    } else {
+      if (p.side == 'F') {
+        if(p.flip == true) {
+          return `
+          ${standard}
+          ${pins('', '-')}
+          ${outline('', '-', 'F')})
+          `
+        } else{
+          return `
+          ${standard}
+          ${pins('-', '')}
+          ${outline('-', '', 'F')})
+          `
+        }
+      }
+      else {
+        if(p.flip == true) {
+          return `
+          ${standard}
+          ${pins('-', '')}
+          ${outline('-', '', 'B')})
+          `
+        } else {
+          return `
+          ${standard}
+          ${pins('', '-')}
+          ${outline('', '-', 'B')})
+          `
+        }
+      }
+    }
   }
 }

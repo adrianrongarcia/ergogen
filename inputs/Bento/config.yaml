@@ -1068,6 +1068,8 @@ pcbs:
         params:
           orientation: up
           side: F
+          reversible: true
+          model: vcc-gnd
           SMD: false
           legends: false
       MountingHoles:
@@ -1077,8 +1079,10 @@ pcbs:
         what: PinHeader_2x05_KeyMatrix
         where: 
           ref: MCU_MainMatrix_Connector
-          shift: [-2.54/2, 2*2.54]
+          shift: [2.54/2, -2*2.54]
+          rotate: 180
         params:
+          reversible: true
           P1: GP5
           P2: GP6
           P3: GP7
@@ -1095,6 +1099,7 @@ pcbs:
           ref: MCU_ThumbCluster_Connector
           shift: [-2.54/2, 2*2.54]
         params:
+          reversible: true
           P1: GP5
           P2: GP6
           P3: GP7
@@ -1111,6 +1116,7 @@ pcbs:
           ref: MCU_Encoder_Connector
           shift: [0, 2.54]
         params:
+          reversible: true
           GND: GND
           DIR: GP14
           STEPS: GP15
@@ -1120,7 +1126,8 @@ pcbs:
           ref: MCU_SPI_Connector
           shift: [0, 2*2.54 + 2.54/2]
         params:
-          VCC: V3
+          reversible: true
+          VCC: Vin
           GND: GND
           SCK: GP10
           MOSI: GP11
@@ -1132,7 +1139,8 @@ pcbs:
           ref: MCU_Joystick_Connector
           shift: [0, 2*2.54]
         params:
-          VCC: V3
+          reversible: true
+          VCC: Vin
           GND: GND
           VRX: GP26
           VRY: GP27
@@ -1141,9 +1149,10 @@ pcbs:
         what: PAM8302
         where: PAM8302
         params:
+          reversible: true
           A_PLUS: GP4
           A_MINUS: GND
-          Vin: V3
+          Vin: Vin
           GND: GND
           SD: GND
       Speaker_Conector:
@@ -1152,31 +1161,36 @@ pcbs:
           ref: MCU_Speaker_Connector
           shift: [0, 2.54/2]
         params:
+          reversible: true
           SPEAKER_POSITIVE: AUDIO_PLUS
           SPEAKER_NEGATIVE: AUDIO_MINUS
       DRV2605L:
         what: DRV2605L
         where: DRV2605L
         params:
-          Vin: VSYS
+          reversible: true
+          Vin: Vin
           GND: GND
           SCL: GP9
           SDA: GP8 
           MOTOR_INT: GND
-      Shotky:
-        what: Shottky_1N5817
-        where: Shotky_Diode
-        params: 
-          INPUT: Vin
       UART_Jumpers:
         what: PinHeader_2x02
         where: 
           ref: Connector_Jumpers
           shift: [-2.54/2, 2.54/2]
         params:
+          reversible: true
           VOUT: Vout
           VIN: Vin
           POWER: Vin
+      Shotky:
+        what: Shottky_1N5817
+        where: Shotky_Diode
+        params:
+          reversible: true
+          IN: OUTPUT
+          OUT: Vin
       4P4C:
         what: RJ11_4p4c_reversible
         where: 
@@ -1194,7 +1208,8 @@ pcbs:
           shift: [2.54/2, 2.54 + 2.54/2]
         params:
           flip: true
-          VCC: V3
+          reversible: true
+          VCC: Vin
           GND: GND
           SDA: GP2
           SCL: GP3
